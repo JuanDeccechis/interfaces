@@ -1,0 +1,61 @@
+body{
+    background-color: lightgray;
+}
+
+.containerMenu, .containerCanvas {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-around;
+}
+
+h1{
+    color: darkblue;
+    text-align: center;
+}
+.barraProgreso {
+    width: 50%;
+    background-color: white;
+    margin-left: 10px;
+    border: 1px solid darkblue;
+    display: inline-block;
+}
+  
+#valorBarra {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+
+.manejoArchivos, .filtrosSimples {
+    display: flex;
+    padding: 2px 0px;
+}
+
+.filtrosComplejos {
+    width: 100%;
+    background-color: darkblue;
+    padding: 5px 0px;
+    display: flex;
+    justify-content: space-around;    
+}
+
+button {
+    background-color: black;
+    color: white;
+    padding: 2px 5px;    
+}
+
+.tituloBarraProgreso {
+    width: 35%;
+    display: inline-block;
+}
+
+canvas {
+    border: 2px dotted darkblue;
+    background-color: white;
+}
+
+#descargar {
+    height: 23px;
+}
