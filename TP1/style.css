@@ -13,7 +13,7 @@ h1{
     color: darkblue;
     text-align: center;
 }
-.barraProgreso {
+#barraProgreso {
     width: 50%;
     background-color: white;
     margin-left: 10px;
@@ -23,7 +23,7 @@ h1{
   
 #valorBarra {
     width: 1%;
-    height: 30px;
+    height: 100%;
     background-color: green;
 }
 
@@ -38,6 +38,14 @@ h1{
     padding: 5px 0px;
     display: flex;
     justify-content: space-around;    
+}
+
+.progreso {
+    display: flex;
+}
+
+#valorFactorResultante {
+    margin-left: 5px;
 }
 
 button {

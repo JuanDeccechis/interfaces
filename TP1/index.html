@@ -10,20 +10,26 @@
     <h1>PAINT & FILTERS</h1>
     <p>En el presente trabajo se permite cargar una imagen desde disco, editarla con lapiz y goma, aplicarle distintos filtros a la imagen original, y descargar la imagen resultante de aplicar los filtros sin perder calidad.</p>
     <div class="containerMenu">
-        <div class="manejoArchivos">
-            <input type="file" name="cargarImagen" id="cargarImagen"  data-buttonText="Your label here.">
-            <button id="descargar">download</button>
+        <div class="paint">
+            <div class="manejoArchivos">
+                <input type="file" name="cargarImagen" id="cargarImagen"  data-buttonText="Your label here.">
+                <button id="descargar">download</button>
+            </div>
+            <div class="accionesPaint">
+                <button id="rectangulo">rectangulo</button>
+            </div>
         </div>
         <div class="filtros">
-            <div class="tituloBarraProgreso">
-                Seleccione el factor a aplicar en los filtros:
-            </div>
-            <div class="barraProgreso">
-                <div id="valorBarra">        
+            <div class="progreso">
+                <div class="tituloBarraProgreso">
+                    Seleccione el factor a aplicar en los filtros:
                 </div>
+                <div id="barraProgreso">
+                    <div id="valorBarra">        
+                    </div>
+                </div>
+                <span id="valorFactorResultante"></span>
             </div>
-            <span id="valorFactorResultante"></span>
-
             <div class="filtrosSimples">
                 <button id="binarizacion">filtro binarizacion</button>
                 <button id="filtroEscalaGris">filtroEscalaGris</button>
@@ -45,7 +51,7 @@
         <canvas id="canvasResultadoFiltro" width="500" height="400" ></canvas>
     </div>
 
-    <script src="canvas.js"></script>
+    <script src="paint.js"></script>
     <script src="manejoArchivos.js"></script>
     <script src="filtrosSimples.js"></script>
     <script src="filtrosComplejos.js"></script>
