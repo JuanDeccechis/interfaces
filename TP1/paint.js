@@ -18,6 +18,7 @@ document.querySelector("#colorLapiz").addEventListener("change", cambiarColor);
 
 
 function dibujarRectangulo() {
+    color = document.querySelector("#colorLapiz").value;
     document.querySelector("#canvas").addEventListener("mousedown", empezarDibujar);
     figura = "rectangulo";
     sigueDibujando = false;
@@ -89,6 +90,7 @@ function terminaDibujar(event) {
         case "rectangulo":
             ctx.fillStyle = color;
             ctx.fillRect(widthInicial, heightInicial, widthFinal - widthInicial, heightFinal - heightInicial);
+            dibujarRectangulo();
             break;
         case "linea":
             ctx.moveTo(widthInicial, heightInicial);
