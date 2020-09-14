@@ -76,6 +76,11 @@ function terminaDibujar(event) {
     if (sigueDibujando) {
         document.querySelector("#canvas").removeEventListener("mousemove", seguirDibujando);
         sigueDibujando = false;
+        if (color == "white") {
+            borrar();
+        } else {
+            dibujar();
+        }
     }
     ctx.beginPath(); 
     ctx.lineWidth = grosor; 
