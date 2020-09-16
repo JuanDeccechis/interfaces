@@ -29,22 +29,22 @@ function cargarArchivo() {
 }
 
 function descargarEditada() {
-    if (document.getElementById("linkDescarga")){
-        document.getElementById("linkDescarga").remove();
+    if (document.getElementById("linkDescargaEditada")){
+        document.getElementById("linkDescargaEditada").remove();
     }
     let link = document.createElement("a");
-    link.id = "linkDescarga";
+    link.id = "linkDescargaEditada";
     link.download = "imageDownloadedFromCanvas.png";
     link.href = document.querySelector("#canvas").toDataURL("image/png").replace("image/png", "image/octet-stream");
     link.click();   
 }
 
 function descargarFiltrada() {
-    if (document.getElementById("linkDescarga")){
-        document.getElementById("linkDescarga").remove();
+    if (document.getElementById("linkDescargaFiltrada")){
+        document.getElementById("linkDescargaFiltrada").remove();
     }
     let link = document.createElement("a");
-    link.id = "linkDescarga";
+    link.id = "linkDescargaFiltrada";
     link.download = "imageDownloadedFromCanvas.png";
     link.href = document.querySelector("#canvasResultadoFiltro").toDataURL("image/png").replace("image/png", "image/octet-stream");
     link.click();   

@@ -6,7 +6,6 @@ document.querySelector("#filtroBlur").addEventListener("click", filtroBlur);
 document.querySelector("#filtroBordes").addEventListener("click", filtroBordes);
 
 function filtroLuminosidad() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let factor = porcentaje / 100 * 3;
     let HSV = 0;
@@ -30,7 +29,6 @@ function filtroLuminosidad() {
 }
 
 function filtroSaturacion() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let factor = porcentaje / 100 * 3;
     let HSV = 0;
@@ -66,7 +64,6 @@ function getVecinos(imageData, i, j) {
 }
 
 function filtroBlur(){
-    let canvas = document.querySelector("#canvas");
     let originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let imageDataResult = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let index = 0;
@@ -96,7 +93,6 @@ function filtroBlur(){
 }
 
 function filtroBordes() {
-    let canvas = document.querySelector("#canvas");
     let originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let imageDataResult = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let index = 0;

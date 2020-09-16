@@ -7,7 +7,6 @@ document.querySelector("#filtroEscalaGris").addEventListener("click", filtroEsca
 document.querySelector("#filtroBrillo").addEventListener("click", filtroBrillo);
 document.querySelector("#filtroSepia").addEventListener("click", filtroSepia);
 
-let ctxResultado = document.querySelector("#canvasResultadoFiltro").getContext("2d");
 let porcentaje = 0;
 
 function move(event) {
@@ -22,7 +21,6 @@ function move(event) {
 }
 
 function filtroBinarizacion() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let valorPixel = 0;
     for (let j = 0; j < imageData.height; j++) {
@@ -43,9 +41,7 @@ function filtroBinarizacion() {
 }
 
 function filtroNegativo() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let valorPixel = 0;
     for (let j = 0; j < imageData.height; j++) {
         for (let i = 0; i < imageData.width; i++) {
             let index = (i + imageData.width * j) * 4;
@@ -58,7 +54,6 @@ function filtroNegativo() {
 }
 
 function filtroEscalaGris() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let valorPixel = 0;
     for (let j = 0; j < imageData.height; j++) {
@@ -83,7 +78,6 @@ function truncarValor(valorPixel) {
 }
 
 function filtroBrillo() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let factor = porcentaje / 100 * 3;
     for (let j = 0; j < imageData.height; j++) {
@@ -98,7 +92,6 @@ function filtroBrillo() {
 }
 
 function filtroSepia() {
-    let canvas = document.querySelector("#canvas");
     let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let outputRed = 0;
     let outputGreen = 0;

@@ -1,13 +1,15 @@
 "use strict";
 
-let ctx = document.querySelector("#canvas").getContext("2d");
+let canvas = document.querySelector("#canvas");
+let ctx = canvas.getContext("2d");
+let ctxResultado = document.querySelector("#canvasResultadoFiltro").getContext("2d");
 let figura = "";
 let widthInicial = 0;
 let heightInicial = 0;
 let grosor = "1";
 let color = "black";
 let sigueDibujando = false;
-let posicionesIniciales = document.querySelector("#canvas").getBoundingClientRect();
+let posicionesIniciales = canvas.getBoundingClientRect();
 
 
 document.querySelector("#rectangulo").addEventListener("click", dibujarRectangulo);
