@@ -8,17 +8,18 @@
 </head>
 <body>
     <h1>PAINT & FILTERS</h1>
-    <p>En el presente trabajo se permite cargar una imagen desde disco, editarla con lapiz y goma, aplicarle distintos filtros a la imagen original, y descargar la imagen resultante de aplicar los filtros sin perder calidad.</p>
+    <p>En el presente trabajo se permite cargar una imagen desde disco, editarla con lapiz y goma, aplicarle distintos filtros a la imagen, y descargar la imagen luego de la edicion, y luego de aplicar los filtros.</p>
     <div class="containerMenu">
         <div class="paint">
             <div class="manejoArchivos">
                 <input type="file" name="cargarImagen" id="cargarImagen"  data-buttonText="Your label here.">
-                <button id="descargar">download</button>
+                <button id="descargarEditada">Descargar Imagen Editada</button>
+                <button id="descargarFiltrada">Descargar Imagen Filtrada</button>
             </div>
             <div class="accionesPaint">
-                <button id="rectangulo">rectangulo</button>
+                <button id="rectangulo">Rectangulo</button>
                 <button id="lapiz">Lapiz</button>
-                <button id="goma">goma</button>
+                <button id="goma">Goma</button>
                 <select class="form-control" id="grosor">
                     <option>1</option>
                     <option>2</option>
