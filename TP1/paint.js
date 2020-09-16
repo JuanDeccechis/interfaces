@@ -15,6 +15,7 @@ let posicionesIniciales = canvas.getBoundingClientRect();
 document.querySelector("#rectangulo").addEventListener("click", dibujarRectangulo);
 document.querySelector("#lapiz").addEventListener("click", dibujar);
 document.querySelector("#goma").addEventListener("click", borrar);
+document.querySelector("#nuevo").addEventListener("click", nuevo);
 document.querySelector("#grosor").addEventListener("change", cambiarGrosor);
 document.querySelector("#colorLapiz").addEventListener("change", cambiarColor);
 
@@ -32,6 +33,12 @@ function cambiarGrosor() {
 
 function cambiarColor() {
     color = document.querySelector("#colorLapiz").value;
+}
+
+function nuevo() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    document.querySelector("#cargarImagen").value = "";
 }
 
 function borrar() {
