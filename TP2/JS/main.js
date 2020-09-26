@@ -2,16 +2,22 @@
 
 document.querySelector("#jugar").addEventListener("click", configurar);
 document.querySelector("#atras").addEventListener("click", volverAConfigurar);
-let config;
+document.querySelector("#NEnLinea").addEventListener("change", cambiarNEnLinea);
+
+let config =  new Configuracion();
 let turnoJugador1 = true;
 let juego = [];
 
 function configurar(event) {
     event.preventDefault();
     event.stopPropagation();
-    config = new Configuracion();
     config.setDisabled();
     crearJuego();
+}
+
+function cambiarNEnLinea(){
+    config.setCantidadParaGanar(document.querySelector("#NEnLinea").value);
+    config.cambiarNEnLinea();
 }
 
 function volverAConfigurar() {

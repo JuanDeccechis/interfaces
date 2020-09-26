@@ -34,4 +34,35 @@ class Configuracion {
     getCantidadParaGanar() {
         return this.cantidadParaGanar;
     }
+
+    setCantidadParaGanar(cantidad) {
+        this.cantidadParaGanar = cantidad;
+    }
+    
+    cambiarNEnLinea() {
+        console.log("cambbia N");
+        let cantidadEnLinea = this.getCantidadParaGanar();
+        if (document.querySelector("#filasTablero").value < cantidadEnLinea) {
+            document.querySelector("#filasTablero").value = cantidadEnLinea;
+        }
+        if (document.querySelector("#columnasTablero").value < cantidadEnLinea) {
+            document.querySelector("#columnasTablero").value = cantidadEnLinea;
+        }
+        let opcionesFilasTablero = document.querySelector("#filasTablero").getElementsByTagName("option");
+        for (let index = 0; index < opcionesFilasTablero.length; index++) {
+            if (opcionesFilasTablero[index].value < cantidadEnLinea){
+                opcionesFilasTablero[index].setAttribute("disabled", true);
+            } else {
+                opcionesFilasTablero[index].removeAttribute("disabled");
+            }
+        }
+        let opcionesColumnasTablero = document.querySelector("#columnasTablero").getElementsByTagName("option");
+        for (let index = 0; index < opcionesColumnasTablero.length; index++) {
+            if (opcionesColumnasTablero[index].value < cantidadEnLinea){
+                opcionesColumnasTablero[index].setAttribute("disabled", true);
+            } else {
+                opcionesColumnasTablero[index].removeAttribute("disabled");
+            }
+        }
+    }
 }
