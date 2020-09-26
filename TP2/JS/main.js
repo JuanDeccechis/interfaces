@@ -3,6 +3,8 @@
 document.querySelector("#jugar").addEventListener("click", configurar);
 document.querySelector("#atras").addEventListener("click", volverAConfigurar);
 let config;
+let turnoJugador1 = true;
+let juego = [];
 
 function configurar(event) {
     event.preventDefault();
@@ -22,28 +24,23 @@ function volverAConfigurar() {
 }
 
 function crearJuego() {
-    let juego = document.querySelector("#juego");
+    let juegoHTML = document.querySelector("#juego");
     let cantidadColumnasJuego = config.getColumnas();
     document.querySelector("#atras").removeAttribute("disabled");
     for (let index = 0; index < cantidadColumnasJuego; index++) {
         let elemento = document.createElement("BUTTON");
         elemento.innerHTML = `columna ${index}`;
         elemento.addEventListener("click", () => jugar(index));
-        juego.appendChild(elemento);
-        
+        juegoHTML.appendChild(elemento);   
     }
+    for (let i = 0; i < config.getFilas(); i++) { //0 - 5
+        juego[i]= [];
+        for (let j = 0; j < config.getColumnas(); j++) { // 0 - 6
+            juego[i][j] = 0;
+        }   
+    }
+    console.table(juego);
 }
-
-
-let turnoJugador1 = true;
-let juego = [];
-for (let i = 0; i < 6; i++) { //0 - 5
-    juego[i]= [];
-    for (let j = 0; j < 7; j++) { // 0 - 6
-        juego[i][j] = 0;
-    }   
-}
-console.table(juego);
 
 function jugar(columna){
     let fila = calcularProximaFila(juego, columna);
@@ -55,7 +52,7 @@ function jugar(columna){
             juego[fila][columna] = 2;
         }
         turnoJugador1 = !turnoJugador1;
-        if (revisarNEnLinea(juego, fila, columna, 4)) {
+        if (revisarNEnLinea(juego, fila, columna, config.getCantidadParaGanar())) {
             alert("felicitaciones!!!");
         }
     }
@@ -67,7 +64,7 @@ function jugar(columna){
 
 function calcularProximaFila(mat, columna) {
     let resul = -1;
-    for (let filas = 0; filas < 6; filas++) {
+    for (let filas = 0; filas < config.getFilas(); filas++) {
         if (mat[filas][columna] === 0) {
             resul = filas;
         }
@@ -122,7 +119,7 @@ function buscarOrigen(juego, fila, columna, direccion) {
             break;
         case "diagonal1": //abajo izq
             for (let indiceColumna = columna; indiceColumna >= 0 ; indiceColumna--) {
-                if ((fila+columna-indiceColumna) < 6) {
+                if ((fila+columna-indiceColumna) < config.getFilas()) {
                     if (seguirBuscando && juego[fila+columna-indiceColumna][indiceColumna] !== juego[fila][columna]) {
                         seguirBuscando = false;
                         resultado = indiceColumna + 1;
@@ -136,7 +133,7 @@ function buscarOrigen(juego, fila, columna, direccion) {
                 }
             }
             //correccion
-            if (seguirBuscando && (fila+columna) <= 6 && juego[fila+columna][0] === juego[fila][columna]) {
+            if (seguirBuscando && (fila+columna) <= (config.getColumnas() -1) && juego[fila+columna][0] === juego[fila][columna]) {
                 resultado = 0;
             }
             break;
@@ -175,29 +172,29 @@ function buscarFin(juego, fila, columna, direccion) {
     
     switch (direccion) {
         case "vertical":
-            for (let indiceFila = fila; indiceFila < 6 ; indiceFila++) {
+            for (let indiceFila = fila; indiceFila < config.getFilas() ; indiceFila++) {
                 if (seguirBuscando && juego[indiceFila][columna] !== juego[fila][columna]) {
                     seguirBuscando = false;
                     resultado = indiceFila - 1;
                 }
             }
-            if (seguirBuscando && juego[5][columna] === juego[fila][columna]) {
-                resultado = 5;
+            if (seguirBuscando && juego[(config.getFilas() - 1)][columna] === juego[fila][columna]) {
+                resultado = (config.getFilas() - 1);
             }
             break;
         case "horizontal":
-            for (let indiceColumna = columna; indiceColumna < 7 ; indiceColumna++) {
+            for (let indiceColumna = columna; indiceColumna < config.getColumnas() ; indiceColumna++) {
                 if (seguirBuscando && juego[fila][indiceColumna] !== juego[fila][columna]) {
                     seguirBuscando = false;
                     resultado = indiceColumna - 1;
                 }
             }
-            if (seguirBuscando && juego[fila][6] === juego[fila][columna]) {
-                resultado = 6;
+            if (seguirBuscando && juego[fila][config.getColumnas() -1] === juego[fila][columna]) {
+                resultado = config.getColumnas() -1;
             }
             break;
         case "diagonal1": //arriba derecha
-            for (let indiceColumna = columna; indiceColumna < 7 ; indiceColumna++) {
+            for (let indiceColumna = columna; indiceColumna < config.getColumnas() ; indiceColumna++) {
                 if ((fila+columna-indiceColumna) >= 0) {
                     if (seguirBuscando && juego[fila+columna-indiceColumna][indiceColumna] !== juego[fila][columna]) {
                         seguirBuscando = false;
@@ -212,14 +209,14 @@ function buscarFin(juego, fila, columna, direccion) {
                 }
             }
             //correccion
-            if (seguirBuscando && (fila+columna - 6) >= 0 && juego[fila+columna-6][6] === juego[fila][columna]) {
-                resultado = 6;
+            if (seguirBuscando && (fila+columna - (config.getColumnas() - 1)) >= 0 && juego[fila+columna-(config.getColumnas() -1 )][config.getColumnas() - 1] === juego[fila][columna]) {
+                resultado = config.getColumna() -1;
             }
             break;
 
         case "diagonal2": //arriba izq
-            for (let indiceColumna = columna; indiceColumna < 7 ; indiceColumna++) {
-                if ((fila+indiceColumna-columna) < 6) {
+            for (let indiceColumna = columna; indiceColumna < config.getColumnas() ; indiceColumna++) {
+                if ((fila+indiceColumna-columna) < config.getFilas()) {
                     if (seguirBuscando && juego[fila+indiceColumna-columna][indiceColumna] !== juego[fila][columna]) {
                         seguirBuscando = false;
                         resultado = indiceColumna - 1;
@@ -233,8 +230,8 @@ function buscarFin(juego, fila, columna, direccion) {
                 }
             }
             //correccion
-            if (seguirBuscando && (fila-columna + 6) >= 0 && juego[fila-columna+6][6] === juego[fila][columna]) {
-                resultado = 6;
+            if (seguirBuscando && (fila-columna + (config.getColumnas() -1) ) >= 0 && juego[fila-columna+ (config.getColumnas() -1)][(config.getColumnas() -1)] === juego[fila][columna]) {
+                resultado = config.getColumnas() -1;
             }
             break;
 

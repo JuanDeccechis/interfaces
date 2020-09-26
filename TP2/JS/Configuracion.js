@@ -26,4 +26,12 @@ class Configuracion {
     getColumnas() {
         return this.cantidadColumnasJuego;
     }
+
+    getFilas() {
+        return this.cantidadFilasJuego;
+    }
+
+    getCantidadParaGanar() {
+        return this.cantidadParaGanar;
+    }
 }
