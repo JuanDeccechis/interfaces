@@ -50,10 +50,10 @@ function calcularProximaFila(mat, columna) {
 
 function revisarNEnLinea(juego, fila, columna, cantidad) { //podria hacer una funcion recursiva, pero dada la cantidad de filas y columnas no lo veo necesario
     let resultado = false;
-    let cantidadEnVertical = revisarNEnLineaVertical(juego, fila, columna);
-    let cantidadEnHorizontal = revisarNEnLineahorizontal(juego, fila, columna);
-    let cantidadEnDiag1 = revisarNEnLineaDiagonal1(juego, fila, columna);
-    let cantidadEnDiag2 = revisarNEnLineaDiagonal2(juego, fila, columna);
+    let cantidadEnVertical = revisarNEnLineaDireccion(juego, fila, columna, "vertical");
+    let cantidadEnHorizontal = revisarNEnLineaDireccion(juego, fila, columna, "horizontal");
+    let cantidadEnDiag1 = revisarNEnLineaDireccion(juego, fila, columna, "diagonal1");
+    let cantidadEnDiag2 = revisarNEnLineaDireccion(juego, fila, columna, "diagonal2");
     if ((cantidadEnVertical >= cantidad) || (cantidadEnHorizontal >= cantidad) || (cantidadEnDiag1 >= cantidad) || (cantidadEnDiag2 >= cantidad)) {
         resultado = true;
     }
@@ -61,24 +61,10 @@ function revisarNEnLinea(juego, fila, columna, cantidad) { //podria hacer una fu
 
 }
 
-function revisarNEnLineaVertical(juego, fila, columna){ //solo para abajo
+function revisarNEnLineaDireccion(juego, fila, columna, direccion){ 
     let cantidad = 0;
-    for (let indiceFila = fila; indiceFila < 6 ; indiceFila++) {
-        if (juego[fila][columna] === juego[indiceFila][columna]) {
-            cantidad++;
-        }
-        else {
-            return cantidad;
-        }
-    }
-    return cantidad;
-}
-
-function revisarNEnLineahorizontal(juego, fila, columna){ 
-    let cantidad = 0;
-
-    let origen = buscarOrigen(juego, fila, columna, "horizontal");
-    let fin = buscarFin(juego, fila, columna, "horizontal");
+    let origen = buscarOrigen(juego, fila, columna, direccion);
+    let fin = buscarFin(juego, fila, columna, direccion);
     if (origen === -1) {
         origen = columna;
     } 
@@ -89,40 +75,13 @@ function revisarNEnLineahorizontal(juego, fila, columna){
     return cantidad;
 }
 
-function revisarNEnLineaDiagonal1(juego, fila, columna){ 
-    let cantidad = 0;
-
-    let origen = buscarOrigen(juego, fila, columna, "diagonal1");
-    let fin = buscarFin(juego, fila, columna, "diagonal1");
-    if (origen === -1) {
-        origen = columna;
-    } 
-    if (fin === -1) {
-        fin = columna;
-    }
-    cantidad = fin - origen + 1; //por columnas
-    return cantidad;
-}
-
-function revisarNEnLineaDiagonal2(juego, fila, columna){ 
-    let cantidad = 0;
-
-    let origen = buscarOrigen(juego, fila, columna, "diagonal2");
-    let fin = buscarFin(juego, fila, columna, "diagonal2");
-    if (origen === -1) {
-        origen = columna;
-    } 
-    if (fin === -1) {
-        fin = columna;
-    }
-    cantidad = fin - origen + 1; //por columnas
-    return cantidad;
-}
-
 function buscarOrigen(juego, fila, columna, direccion) {
     let resultado = -1;
     let seguirBuscando = true;
     switch (direccion) {
+        case "vertical":
+            resultado = fila;
+            break;
         case "horizontal":
             for (let indiceColumna = columna; indiceColumna >= 0 ; indiceColumna--) {
                 if (seguirBuscando && juego[fila][indiceColumna] !== juego[fila][columna]) {
@@ -188,6 +147,17 @@ function buscarFin(juego, fila, columna, direccion) {
     let seguirBuscando = true;
     
     switch (direccion) {
+        case "vertical":
+            for (let indiceFila = fila; indiceFila < 6 ; indiceFila++) {
+                if (seguirBuscando && juego[indiceFila][columna] !== juego[fila][columna]) {
+                    seguirBuscando = false;
+                    resultado = indiceFila - 1;
+                }
+            }
+            if (seguirBuscando && juego[5][columna] === juego[fila][columna]) {
+                resultado = 5;
+            }
+            break;
         case "horizontal":
             for (let indiceColumna = columna; indiceColumna < 7 ; indiceColumna++) {
                 if (seguirBuscando && juego[fila][indiceColumna] !== juego[fila][columna]) {
