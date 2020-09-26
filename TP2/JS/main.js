@@ -133,7 +133,7 @@ function buscarOrigen(juego, fila, columna, direccion) {
                 }
             }
             //correccion
-            if (seguirBuscando && (fila+columna) <= (config.getColumnas() -1) && juego[fila+columna][0] === juego[fila][columna]) {
+            if (seguirBuscando && (fila+columna) <= (config.getFilas() -1) && juego[fila+columna][0] === juego[fila][columna]) {
                 resultado = 0;
             }
             break;
@@ -210,7 +210,7 @@ function buscarFin(juego, fila, columna, direccion) {
             }
             //correccion
             if (seguirBuscando && (fila+columna - (config.getColumnas() - 1)) >= 0 && juego[fila+columna-(config.getColumnas() -1 )][config.getColumnas() - 1] === juego[fila][columna]) {
-                resultado = config.getColumna() -1;
+                resultado = config.getColumnas() -1;
             }
             break;
 
