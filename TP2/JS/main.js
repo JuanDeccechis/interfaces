@@ -31,6 +31,7 @@ function volverAConfigurar() {
     }
     config.setEnabled();
     document.querySelector("#atras").setAttribute("disabled", true);
+    mostrarTurno("noMostrar");
     tablero.limpiarTablero();
 }
 
@@ -52,7 +53,25 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
         }   
     }
     tablero.crearTablero(config.getFilas(), config.getColumnas());
+    mostrarTurno();
     console.table(juego);
+}
+
+function mostrarTurno(debeMostrar){
+    let elementoTurno = document.querySelector("#turno");
+    let aMostrar = "Turno de ";
+    if (debeMostrar === "noMostrar") {
+        aMostrar = "";
+    }
+    else {
+        if (turnoJugador1) {
+            aMostrar = aMostrar + document.querySelector("#jugador1").value;
+        }
+        else {
+            aMostrar = aMostrar + document.querySelector("#jugador2").value;
+        }
+    }
+    elementoTurno.innerHTML = aMostrar;
 }
 
 //LOGICA
@@ -66,9 +85,23 @@ function jugar(columna){
             juego[fila][columna] = 2;
         }
         tablero.pintarJugada(fila, columna, turnoJugador1);
-        turnoJugador1 = !turnoJugador1;
         if (revisarNEnLinea(juego, fila, columna, config.getCantidadParaGanar())) {
-            alert("felicitaciones!!!");
+            let ganador;
+            if (turnoJugador1) {
+                ganador = document.querySelector("#jugador1").value;
+            } else {
+                ganador = document.querySelector("#jugador2").value;
+            }
+            alert(`felicitaciones ${ganador}!!!`);
+            document.querySelector("#atras").innerHTML = "volver a jugar";
+            let elementos = document.querySelector("#botones");
+            while (elementos.firstChild) {
+                elementos.removeChild(elementos.lastChild);
+            }
+        }
+        else {
+            turnoJugador1 = !turnoJugador1;
+            mostrarTurno();
         }
     }
     else {
