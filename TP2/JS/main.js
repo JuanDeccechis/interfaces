@@ -5,12 +5,16 @@ document.querySelector("#atras").addEventListener("click", volverAConfigurar);
 document.querySelector("#NEnLinea").addEventListener("change", cambiarNEnLinea);
 
 let config =  new Configuracion();
+let tablero = new Tablero();
 let turnoJugador1 = true;
 let juego = [];
 
+/*CONFIGURACION */
 function configurar(event) {
     event.preventDefault();
     event.stopPropagation();
+    config.setFilas(document.querySelector("#filasTablero").value);
+    config.setColumnas(document.querySelector("#columnasTablero").value);
     config.setDisabled();
     crearJuego();
 }
@@ -21,16 +25,17 @@ function cambiarNEnLinea(){
 }
 
 function volverAConfigurar() {
-    let elementos = document.querySelector("#juego");
+    let elementos = document.querySelector("#botones");
     while (elementos.firstChild) {
         elementos.removeChild(elementos.lastChild);
     }
     config.setEnabled();
     document.querySelector("#atras").setAttribute("disabled", true);
+    tablero.limpiarTablero();
 }
 
-function crearJuego() {
-    let juegoHTML = document.querySelector("#juego");
+function crearJuego() { //finaliza las configuraciones para poder jugar
+    let juegoHTML = document.querySelector("#botones");
     let cantidadColumnasJuego = config.getColumnas();
     document.querySelector("#atras").removeAttribute("disabled");
     for (let index = 0; index < cantidadColumnasJuego; index++) {
@@ -39,15 +44,18 @@ function crearJuego() {
         elemento.addEventListener("click", () => jugar(index));
         juegoHTML.appendChild(elemento);   
     }
-    for (let i = 0; i < config.getFilas(); i++) { //0 - 5
+    juego = [];
+    for (let i = 0; i < config.getFilas(); i++) {
         juego[i]= [];
-        for (let j = 0; j < config.getColumnas(); j++) { // 0 - 6
+        for (let j = 0; j < config.getColumnas(); j++) {
             juego[i][j] = 0;
         }   
     }
+    tablero.crearTablero(config.getFilas(), config.getColumnas());
     console.table(juego);
 }
 
+//LOGICA
 function jugar(columna){
     let fila = calcularProximaFila(juego, columna);
     if (fila !== -1) {
@@ -57,6 +65,7 @@ function jugar(columna){
         else {
             juego[fila][columna] = 2;
         }
+        tablero.pintarJugada(fila, columna, turnoJugador1);
         turnoJugador1 = !turnoJugador1;
         if (revisarNEnLinea(juego, fila, columna, config.getCantidadParaGanar())) {
             alert("felicitaciones!!!");

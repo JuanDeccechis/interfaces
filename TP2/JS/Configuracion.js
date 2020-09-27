@@ -35,10 +35,18 @@ class Configuracion {
         return this.cantidadParaGanar;
     }
 
+    setFilas(filas) {
+        this.cantidadFilasJuego = filas;
+    }
+
+    setColumnas(columnas) {
+        this.cantidadColumnasJuego = columnas;
+    }
+
     setCantidadParaGanar(cantidad) {
         this.cantidadParaGanar = cantidad;
     }
-    
+
     cambiarNEnLinea() {
         console.log("cambbia N");
         let cantidadEnLinea = this.getCantidadParaGanar();
