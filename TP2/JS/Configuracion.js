@@ -10,17 +10,21 @@ class Configuracion {
     }
 
     setDisabled() {
-        let formNodes = document.querySelectorAll(".formElement");
+        /*let formNodes = document.querySelectorAll(".formElement");
         for (let index = 0; index < formNodes.length; index++) {
             formNodes[index].setAttribute("disabled", true);
-        }
+        }*/
+        document.querySelector("#configuracion").classList.add("oculto");
+        document.querySelector("#canvas").classList.remove("oculto");
     }
 
     setEnabled() {
-        let formNodes = document.querySelectorAll(".formElement");
+        /*let formNodes = document.querySelectorAll(".formElement");
         for (let index = 0; index < formNodes.length; index++) {
             formNodes[index].removeAttribute("disabled");
-        }
+        }*/
+        document.querySelector("#configuracion").classList.remove("oculto");
+        document.querySelector("#canvas").classList.add("oculto");
     }
 
     getColumnas() {

@@ -1,13 +1,51 @@
 "use strict";
-
-document.querySelector("#jugar").addEventListener("click", configurar);
-document.querySelector("#atras").addEventListener("click", volverAConfigurar);
-document.querySelector("#NEnLinea").addEventListener("change", cambiarNEnLinea);
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelector("#jugar").addEventListener("click", configurar);
+    document.querySelector("#atras").addEventListener("click", volverAConfigurar);
+    document.querySelector("#NEnLinea").addEventListener("change", cambiarNEnLinea);
+    cargarImagenes();
+});
 
 let config =  new Configuracion();
 let tablero = new Tablero();
 let turnoJugador1 = true;
 let juego = [];
+let fichasJugador1 = [];
+let fichasJugador2 = [];
+let margenWidth = 100; //espacio para la ubicacion de fichas
+let margenHeight = 100; //espacio arriba para depositar las fichas
+let canvas = document.querySelector("#canvas");
+let ctx = this.canvas.getContext("2d");
+let ficha = {
+    color: "white",
+    radio: 25
+};
+let imagenFichaRoja;
+let imagenFichaAzul;
+let imagenFichaVerde;
+function cargarImagenes(){
+    let imagenAzul = new Image();
+    imagenAzul.src = "images/fichaAzulTransparente.png";
+    imagenAzul.onload = function() {
+        imagenAzul.width = 2 * ficha.radio;
+        imagenAzul.height = 2 * ficha.radio;
+        imagenFichaAzul = imagenAzul;
+    };
+    let imagenRoja = new Image();
+    imagenRoja.src = "images/fichaRojaTransparente.png";
+    imagenRoja.onload = function() {
+        imagenRoja.width = 2 * ficha.radio;
+        imagenRoja.height = 2 * ficha.radio;
+        imagenFichaRoja = imagenRoja;
+    };
+    let imagenVerde = new Image();
+    imagenVerde.src = "images/fichaVerdeTransparente.png";
+    imagenVerde.onload = function() {
+        imagenVerde.width = 2 * ficha.radio;
+        imagenVerde.height = 2 * ficha.radio;
+        imagenFichaVerde = imagenVerde;
+    };
+}
 
 /*CONFIGURACION */
 function configurar(event) {
@@ -17,6 +55,7 @@ function configurar(event) {
     config.setColumnas(document.querySelector("#columnasTablero").value);
     config.setDisabled();
     crearJuego();
+    crearFichas();
 }
 
 function cambiarNEnLinea(){
@@ -47,6 +86,8 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
         juegoHTML.appendChild(elemento);   
     }
     juego = [];
+    fichasJugador1 = [];
+    fichasJugador2 = [];
     for (let i = 0; i < config.getFilas(); i++) {
         juego[i]= [];
         for (let j = 0; j < config.getColumnas(); j++) {
@@ -289,4 +330,30 @@ function buscarFin(juego, fila, columna, direccion) {
     }
     console.log("fin: " + direccion + " - " + resultado);
     return resultado;
+}
+
+//CREACION DE FICHAS
+function crearFichas(){
+    let fichas = config.getFilas() * config.getColumnas() / 2;
+    let objetoFicha;
+    let posicionXEnCrearFicha;
+    let posicionYEnCrearFicha
+    for (let index = 0; index < fichas; index++) {
+        posicionXEnCrearFicha = calcularRandomLimitado(0, margenWidth - 2 * ficha.radio);
+        posicionYEnCrearFicha = calcularRandomLimitado(margenHeight, canvas.height - 2 * ficha.radio);
+        objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaRoja, ctx);
+        objetoFicha.dibujar();
+        fichasJugador1.push(objetoFicha);
+    }
+    for (let index = 0; index < fichas; index++) {
+        posicionXEnCrearFicha = calcularRandomLimitado(canvas.width - margenWidth, canvas.width - 2 * ficha.radio);
+        posicionYEnCrearFicha = calcularRandomLimitado(margenHeight, canvas.height - 2 * ficha.radio);
+        objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaAzul, ctx);
+        objetoFicha.dibujar();
+        fichasJugador2.push(objetoFicha);
+    }
+}
+
+function calcularRandomLimitado(min, max){
+    return min + Math.random() * (max - min);
 }

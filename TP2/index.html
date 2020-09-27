@@ -17,7 +17,7 @@
           <input type="text" class="form-control formElement" id="jugador2" placeholder="jugador 2">
         </div>
         <div class="form-group row">
-            <label for="NEnLinea" class="col-sm-6 col-form-label">Fichas en linea para ganar</label>
+            <label for="NEnLinea" class="col-sm-6 col-form-label formElement">Fichas en linea para ganar</label>
             <div class="col-sm-6">
                 <select class="form-control formElement" id="NEnLinea">
                     <option>3</option>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="NEnLinea" class="col-sm-6 col-form-label">Cantidad de filas del tablero</label>
+            <label for="NEnLinea" class="col-sm-6 col-form-label formElement">Cantidad de filas del tablero</label>
             <div class="col-sm-6">
                 <select class="form-control formElement" id="filasTablero">
                     <option disabled>3</option>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="NEnLinea" class="col-sm-6 col-form-label">Cantidad de columnas del tablero</label>
+            <label for="NEnLinea" class="col-sm-6 col-form-label formElement">Cantidad de columnas del tablero</label>
             <div class="col-sm-6">
                 <select class="form-control formElement"  id="columnasTablero">
                     <option disabled>3</option>
@@ -62,10 +62,11 @@
           <p id="turno"></p>
           <div id="botones">
           </div>
-          <canvas id="canvas" width="700" height="600" ></canvas>
+          <canvas id="canvas" width="700" height="600" class="oculto"></canvas>
       </div>
       
     <script src="JS/Configuracion.js"></script>
+    <script src="JS/Ficha.js"></script>
     <script src="JS/Tablero.js"></script>
     <script src="JS/main.js"></script>
 </body>

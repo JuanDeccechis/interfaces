@@ -1,3 +1,8 @@
 #configuracion {
     width: 90%;
 }
+
+.oculto {
+    background-color: red;
+    display: none;
+}
