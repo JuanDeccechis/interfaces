@@ -80,6 +80,7 @@ class Tablero {
     }
 
     pintarJugada(fila, columna, turnoJugador1) {
+        document.querySelectorAll(".columna")[columna].setAttribute("disabled", true);
         let margenWidth = 100; //espacio para la ubicacion de fichas
         let margenHeight = 100; //espacio arriba para depositar las fichas
         let tableroHeight = this.canvas.height - margenHeight;
@@ -90,6 +91,23 @@ class Tablero {
         if (turnoJugador1) {
             color = "red";
         }
-        this.crearAgujero(incrementoJ * (columna + 0.5) + margenWidth, incrementoI * (fila + 0.5) + margenHeight, color, this.ficha.radio);
+        this.animarCaida(fila, columna, color, this.ficha.radio, incrementoJ * (columna + 0.5) + margenWidth, incrementoI, margenHeight);
+        //this.crearAgujero(incrementoJ * (columna + 0.5) + margenWidth, incrementoI * (fila + 0.5) + margenHeight, color, this.ficha.radio);
+    }
+
+    animarCaida(fila, columna, color, radio, posicionX, incremento, margen){
+        let limpiarIntervalo = 0;
+        let intervalo = setInterval(() => {
+            if (limpiarIntervalo > fila) {
+                document.querySelectorAll(".columna")[columna].removeAttribute("disabled");
+                clearInterval(intervalo);
+            }
+            else {
+                if (limpiarIntervalo > 0) {
+                    this.crearAgujero(posicionX, incremento * (limpiarIntervalo - 0.5) + margen, "white", radio); //borro el anterior
+                }
+                this.crearAgujero(posicionX, incremento * (limpiarIntervalo + 0.5) + margen, color, radio);
+                limpiarIntervalo ++;
+        }}, 500);
     }
 }

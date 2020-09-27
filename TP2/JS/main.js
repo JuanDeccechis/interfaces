@@ -41,6 +41,7 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
     document.querySelector("#atras").removeAttribute("disabled");
     for (let index = 0; index < cantidadColumnasJuego; index++) {
         let elemento = document.createElement("BUTTON");
+        elemento.setAttribute("class", "columna");
         elemento.innerHTML = `columna ${index}`;
         elemento.addEventListener("click", () => jugar(index));
         juegoHTML.appendChild(elemento);   
