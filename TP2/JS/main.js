@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 let config =  new Configuracion();
 let tablero = new Tablero();
+let posicionesIniciales = null;
 let turnoJugador1 = true;
 let juego = [];
 let fichasJugador1 = [];
 let fichasJugador2 = [];
-let margenWidth = 100; //espacio para la ubicacion de fichas
+let fichaAnterior = null;
+let margenWidth = 150; //espacio para la ubicacion de fichas
 let margenHeight = 100; //espacio arriba para depositar las fichas
 let canvas = document.querySelector("#canvas");
 let ctx = this.canvas.getContext("2d");
@@ -56,6 +58,7 @@ function configurar(event) {
     config.setDisabled();
     crearJuego();
     crearFichas();
+    document.querySelector("#canvas").addEventListener("mousedown", detectarYSeleccionar);
 }
 
 function cambiarNEnLinea(){
@@ -78,13 +81,13 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
     let juegoHTML = document.querySelector("#botones");
     let cantidadColumnasJuego = config.getColumnas();
     document.querySelector("#atras").removeAttribute("disabled");
-    for (let index = 0; index < cantidadColumnasJuego; index++) {
+    /*for (let index = 0; index < cantidadColumnasJuego; index++) {
         let elemento = document.createElement("BUTTON");
         elemento.setAttribute("class", "columna");
         elemento.innerHTML = `columna ${index}`;
         elemento.addEventListener("click", () => jugar(index));
         juegoHTML.appendChild(elemento);   
-    }
+    }*/
     juego = [];
     fichasJugador1 = [];
     fichasJugador2 = [];
@@ -94,6 +97,7 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
             juego[i][j] = 0;
         }   
     }
+    posicionesIniciales = document.querySelector("#canvas").getBoundingClientRect();
     tablero.crearTablero(config.getFilas(), config.getColumnas());
     mostrarTurno();
     console.table(juego);
@@ -112,12 +116,83 @@ function mostrarTurno(debeMostrar){
         else {
             aMostrar = aMostrar + document.querySelector("#jugador2").value;
         }
+        for (let index = 0; index < config.getColumnas(); index++) {
+            tablero.pintarJugada(-1, index, turnoJugador1); //dibuja fichas para orientar al usuario
+        }
     }
     elementoTurno.innerHTML = aMostrar;
 }
 
+//EVENTOS Y DRAG & DROP
+function detectarYSeleccionar(event) {
+    let posicionXClickeada = event.clientX - posicionesIniciales.left;
+    let posicionYClickeada = event.clientY - posicionesIniciales.top;
+    console.log("posiciones del mouse respecto al canvas: ");
+    console.log(posicionXClickeada);
+    console.log(posicionYClickeada);
+    
+    let isTablero = tablero.tableroFueClickeado(posicionXClickeada, posicionYClickeada);
+    if (!(isTablero)) {
+        /*if (indiceSeleccionadoAnterior !== -1) {
+            fichasJuego[indiceSeleccionadoAnterior].setSeleccionada(false);
+        }*/
+        let fichaSeleccionada = null;
+        if (turnoJugador1) {
+            for (let index = 0; index < fichasJugador1.length; index++) {
+                if (fichasJugador1[index].fichaFueClickeada(posicionXClickeada, posicionYClickeada)) {
+                    console.log("ficha clickeada: " + index);
+                    fichaSeleccionada = fichasJugador1[index];
+                }
+            }
+        }
+        else {
+            for (let index = 0; index < fichasJugador2.length; index++) {
+                if (fichasJugador2[index].fichaFueClickeada(posicionXClickeada, posicionYClickeada)) {
+                    console.log("ficha clickeada: " + index);
+                    fichaSeleccionada = fichasJugador2[index];
+                }
+            }
+        }
+        if (fichaSeleccionada !== null) {
+            /*SET POSICION ANTERIOR PARA VOLVER*/
+            if (fichaAnterior !== null) {
+                if (fichaSeleccionada === fichaAnterior) {
+                    console.log("ES LA MISMA FICHA");
+                }
+                else {
+                    fichaAnterior.setSeleccionada(false);
+                }
+            }
+            console.log("mi ficha: " + fichaSeleccionada);
+            fichaSeleccionada.setSeleccionada(true);
+            fichaAnterior = fichaSeleccionada;
+            //document.querySelector("#canvas").addEventListener("mousemove", arrastrarFicha);
+            document.querySelector("#canvas").addEventListener("mouseup", liberarEvento);
+            let offsetXFicha = posicionXClickeada - fichaSeleccionada.getPosX();
+            let offsetYFicha = posicionYClickeada - fichaSeleccionada.getPosY();
+            console.log("offset ficha");
+            console.log(offsetXFicha);
+            console.log(offsetYFicha);
+
+        }        
+    } else {
+        console.log("click en el tablero");
+    }
+}
+
+function liberarEvento(event) {
+    let posicionXClickeada = event.clientX - posicionesIniciales.left;
+    let posicionYClickeada = event.clientY - posicionesIniciales.top;
+    let columnaAJugar = tablero.getColumnaAJugar(posicionXClickeada, posicionYClickeada);
+    if (columnaAJugar >= 0) {
+        //fichaAnterior.setPosicion(posicionXClickeada, posicionYClickeada);
+        //fichaAnterior.dibujar();
+        jugar(fichaAnterior, columnaAJugar);
+    }
+}
+
 //LOGICA
-function jugar(columna){
+function jugar(ficha, columna){
     let fila = calcularProximaFila(juego, columna);
     if (fila !== -1) {
         if (turnoJugador1) {
@@ -126,7 +201,7 @@ function jugar(columna){
         else {
             juego[fila][columna] = 2;
         }
-        tablero.pintarJugada(fila, columna, turnoJugador1);
+        tablero.pintarJugada(fila, columna, turnoJugador1, ficha);
         if (revisarNEnLinea(juego, fila, columna, config.getCantidadParaGanar())) {
             let ganador;
             if (turnoJugador1) {
@@ -143,6 +218,7 @@ function jugar(columna){
         }
         else {
             turnoJugador1 = !turnoJugador1;
+
             mostrarTurno();
         }
     }
@@ -339,16 +415,17 @@ function crearFichas(){
     let posicionXEnCrearFicha;
     let posicionYEnCrearFicha
     for (let index = 0; index < fichas; index++) {
-        posicionXEnCrearFicha = calcularRandomLimitado(0, margenWidth - 2 * ficha.radio);
+        posicionXEnCrearFicha = calcularRandomLimitado(0, margenWidth - 4 * ficha.radio); //entre 0 - 100
         posicionYEnCrearFicha = calcularRandomLimitado(margenHeight, canvas.height - 2 * ficha.radio);
-        objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaRoja, ctx);
+        console.log("posicion: " + posicionXEnCrearFicha + ", " + posicionYEnCrearFicha);
+        objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaRoja, imagenFichaVerde, ctx);
         objetoFicha.dibujar();
         fichasJugador1.push(objetoFicha);
     }
     for (let index = 0; index < fichas; index++) {
-        posicionXEnCrearFicha = calcularRandomLimitado(canvas.width - margenWidth, canvas.width - 2 * ficha.radio);
+        posicionXEnCrearFicha = calcularRandomLimitado(canvas.width - margenWidth + 2 * ficha.radio, canvas.width - 2 * ficha.radio);
         posicionYEnCrearFicha = calcularRandomLimitado(margenHeight, canvas.height - 2 * ficha.radio);
-        objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaAzul, ctx);
+        objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaAzul, imagenFichaVerde, ctx);
         objetoFicha.dibujar();
         fichasJugador2.push(objetoFicha);
     }

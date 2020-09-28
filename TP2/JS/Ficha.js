@@ -1,7 +1,7 @@
 "use strict";
 
 class Ficha {
-    constructor(posX, posY, radio, imagen, context) {
+    constructor(posX, posY, radio, imagen, imagenFichaVerde, context) {
         this.posX = posX;
         this.posY = posY;
         this.radio = radio;
@@ -10,6 +10,7 @@ class Ficha {
         this.imagenOriginal = imagen;
         this.context = context;
         this.seleccionada = false;
+        this.imagenSeleccionada = imagenFichaVerde;
     }
 
     setPosicion(x, y) {
@@ -25,7 +26,7 @@ class Ficha {
             let posicionFinY = posicion.y + 2 * this.radio;
             console.log("seleccionada: " + posicion.x + ", " + posicion.y);
             console.log("seleccionadaFIN: " + posicionFinX + ", " + posicionFinY);
-            this.setImagen(imagenFichaVerde);
+            this.setImagen(this.imagenSeleccionada);
             this.dibujar();
         } else {
             this.setImagen(this.imagenOriginal);

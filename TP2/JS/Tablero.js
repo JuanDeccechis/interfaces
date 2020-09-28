@@ -10,6 +10,8 @@ class Tablero {
         };
         this.filasTablero = 0;
         this.columnasTablero = 0;
+        this.margenWidth = 150; //espacio para la ubicacion de fichas
+        this.margenHeight = 100; //espacio arriba para depositar las fichas
     }
 
     getFilasTablero() {
@@ -34,14 +36,12 @@ class Tablero {
         //borde
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#555555";
-        this.ctx.strokeRect(this.getEspacioFicha(), this.getEspacioFicha(), 500 + 2 * this.getEspacioFicha(), 500 + this.getEspacioFicha());
+        this.ctx.strokeRect(this.margenWidth - this.getEspacioFicha(), this.getEspacioFicha(), 500 + 2 * this.getEspacioFicha(), 500 + this.getEspacioFicha());
                 
         this.ctx.beginPath();
         this.ctx.fillStyle = "#CCCC00";
-        let margenWidth = 100; //espacio para la ubicacion de fichas
-        let margenHeight = 100; //espacio arriba para depositar las fichas
-        let tableroHeight = this.canvas.height - margenHeight;
-        let tableroWidth = this.canvas.width - 2 * margenWidth;
+        let tableroHeight = this.canvas.height - this.margenHeight;
+        let tableroWidth = this.canvas.width - 2 * this.margenWidth;
 
         this.ctx.fillRect(margenWidth, margenHeight, tableroWidth, tableroHeight);
         let incrementoI = this.calcularIncremento(tableroHeight, filas);
@@ -79,9 +79,40 @@ class Tablero {
         this.ctx.stroke();
     }
 
-    pintarJugada(fila, columna, turnoJugador1) {
-        document.querySelectorAll(".columna")[columna].setAttribute("disabled", true);
-        let margenWidth = 100; //espacio para la ubicacion de fichas
+    getColumnaAJugar(posicionX, posicionY) {
+        let inicioTableroWidth = 150; //espacio para la ubicacion de fichas
+        let margenHeight = 100; //espacio arriba para depositar las fichas
+        let tableroWidth = this.canvas.width - 2 * inicioTableroWidth;
+        let finTableroWidth = this.canvas.width - inicioTableroWidth;
+        let resultado = -2;
+        let tableroHeight = this.canvas.height - margenHeight;
+        let incrementoI = this.calcularIncremento(tableroHeight, this.getFilasTablero());
+        let inicioEjemploHeight = incrementoI * (-0.5) + margenHeight - this.ficha.radio;
+        let finEjemploHeight = incrementoI * (-0.5) + margenHeight + this.ficha.radio;
+        if ((posicionX < inicioTableroWidth) || (posicionX > finTableroWidth)) {
+            resultado = -1;
+        }
+        else {
+            if ((posicionY < inicioEjemploHeight) || (posicionY > finEjemploHeight)) {
+                resultado = -1;
+            }
+            else {
+                let incrementoJ = this.calcularIncremento(tableroWidth, this.getColumnasTablero());
+                for (let index = 0; index < this.getColumnasTablero(); index++) {
+                    if (posicionX < incrementoJ * (index + 1) + inicioTableroWidth) {
+                        if (resultado === -2) {
+                            resultado = index;
+                        }
+                    }
+                }
+            }
+        }
+        return resultado;
+    }
+
+    pintarJugada(fila, columna, turnoJugador1, ficha) {
+        //document.querySelectorAll(".columna")[columna].setAttribute("disabled", true);
+        let margenWidth = 150; //espacio para la ubicacion de fichas
         let margenHeight = 100; //espacio arriba para depositar las fichas
         let tableroHeight = this.canvas.height - margenHeight;
         let tableroWidth = this.canvas.width - 2 * margenWidth;
@@ -91,15 +122,31 @@ class Tablero {
         if (turnoJugador1) {
             color = "red";
         }
-        this.animarCaida(fila, columna, color, this.ficha.radio, incrementoJ * (columna + 0.5) + margenWidth, incrementoI, margenHeight);
-        //this.crearAgujero(incrementoJ * (columna + 0.5) + margenWidth, incrementoI * (fila + 0.5) + margenHeight, color, this.ficha.radio);
+        if (fila >= 0) {
+            this.animarCaida(fila, columna, color, this.ficha.radio, incrementoJ * (columna + 0.5) + margenWidth, incrementoI, margenHeight, ficha);
+        }
+        else {
+            this.crearAgujero(incrementoJ * (columna + 0.5) + margenWidth, incrementoI * (fila + 0.5) + margenHeight, color, this.ficha.radio);
+        }
     }
 
-    animarCaida(fila, columna, color, radio, posicionX, incremento, margen){
+    tableroFueClickeado(posX, posY){
+        if ((this.margenWidth < posX) && (posX < this.margenWidth + 500)) {
+            if ((this.margenHeight < posY) && (posY < this.margenHeight + 500)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    animarCaida(fila, columna, color, radio, posicionX, incremento, margen, ficha){
         let limpiarIntervalo = 0;
         let intervalo = setInterval(() => {
             if (limpiarIntervalo > fila) {
-                document.querySelectorAll(".columna")[columna].removeAttribute("disabled");
+                this.crearAgujero(posicionX, incremento * (limpiarIntervalo - 0.5) + margen, "white", radio);
+                ficha.setPosicion(posicionX - this.ficha.radio, incremento * (limpiarIntervalo - 0.5) + margen - this.ficha.radio);
+                ficha.setSeleccionada(false);
+                ficha.dibujar();
                 clearInterval(intervalo);
             }
             else {
