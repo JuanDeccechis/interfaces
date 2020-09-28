@@ -91,6 +91,8 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
     juego = [];
     fichasJugador1 = [];
     fichasJugador2 = [];
+    turnoJugador1 = true;
+    fichaAnterior = null;
     for (let i = 0; i < config.getFilas(); i++) {
         juego[i]= [];
         for (let j = 0; j < config.getColumnas(); j++) {
@@ -183,11 +185,15 @@ function detectarYSeleccionar(event) {
 function liberarEvento(event) {
     let posicionXClickeada = event.clientX - posicionesIniciales.left;
     let posicionYClickeada = event.clientY - posicionesIniciales.top;
-    let columnaAJugar = tablero.getColumnaAJugar(posicionXClickeada, posicionYClickeada);
-    if (columnaAJugar >= 0) {
-        //fichaAnterior.setPosicion(posicionXClickeada, posicionYClickeada);
-        //fichaAnterior.dibujar();
-        jugar(fichaAnterior, columnaAJugar);
+    if (fichaAnterior != null) {
+        let columnaAJugar = tablero.getColumnaAJugar(posicionXClickeada, posicionYClickeada);
+        if (columnaAJugar >= 0) {
+            //fichaAnterior.setPosicion(posicionXClickeada, posicionYClickeada);
+            //fichaAnterior.dibujar();
+            jugar(fichaAnterior, columnaAJugar);
+        }
+    } else {
+        alert("seleccione una ficha y vuelva a intentar");
     }
 }
 
@@ -202,6 +208,7 @@ function jugar(ficha, columna){
             juego[fila][columna] = 2;
         }
         tablero.pintarJugada(fila, columna, turnoJugador1, ficha);
+        fichaAnterior = null;
         if (revisarNEnLinea(juego, fila, columna, config.getCantidadParaGanar())) {
             let ganador;
             if (turnoJugador1) {
