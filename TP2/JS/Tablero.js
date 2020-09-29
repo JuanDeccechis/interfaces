@@ -81,14 +81,11 @@ class Tablero {
 
     getColumnaAJugar(posicionX, posicionY) {
         let inicioTableroWidth = 150; //espacio para la ubicacion de fichas
-        let margenHeight = 100; //espacio arriba para depositar las fichas
         let tableroWidth = this.canvas.width - 2 * inicioTableroWidth;
         let finTableroWidth = this.canvas.width - inicioTableroWidth;
         let resultado = -2;
-        let tableroHeight = this.canvas.height - margenHeight;
-        let incrementoI = this.calcularIncremento(tableroHeight, this.getFilasTablero());
-        let inicioEjemploHeight = incrementoI * (-0.5) + margenHeight - this.ficha.radio;
-        let finEjemploHeight = incrementoI * (-0.5) + margenHeight + this.ficha.radio;
+        let inicioEjemploHeight = 0;
+        let finEjemploHeight = 2 * this.ficha.radio;
         if ((posicionX < inicioTableroWidth) || (posicionX > finTableroWidth)) {
             resultado = -1;
         }
@@ -123,10 +120,10 @@ class Tablero {
             color = "red";
         }
         if (fila >= 0) {
-            this.animarCaida(fila, columna, color, this.ficha.radio, incrementoJ * (columna + 0.5) + margenWidth, incrementoI, margenHeight, ficha);
+            this.animarCaida(fila, color, this.ficha.radio, incrementoJ * (columna + 0.5) + margenWidth, incrementoI, margenHeight, ficha);
         }
         else {
-            this.crearAgujero(incrementoJ * (columna + 0.5) + margenWidth, incrementoI * (fila + 0.5) + margenHeight, color, this.ficha.radio);
+            this.crearAgujero(incrementoJ * (columna + 0.5) + margenWidth, this.ficha.radio, color, this.ficha.radio);
         }
     }
 
@@ -139,7 +136,16 @@ class Tablero {
         return false;
     }
 
-    animarCaida(fila, columna, color, radio, posicionX, incremento, margen, ficha){
+    tableroExtendidoFueClickeado(posX, posY){
+        if ((this.margenWidth - 2 * this.ficha.radio < posX) && (posX < this.margenWidth + 500 + 2 * this.ficha.radio)) {
+            if ((this.margenHeight - 2 * this.ficha.radio < posY) && (posY < this.margenHeight + 500)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    animarCaida(fila, color, radio, posicionX, incremento, margen, ficha){
         let limpiarIntervalo = 0;
         let intervalo = setInterval(() => {
             if (limpiarIntervalo > fila) {

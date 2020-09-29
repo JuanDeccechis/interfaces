@@ -13,6 +13,8 @@ let turnoJugador1 = true;
 let juego = [];
 let fichasJugador1 = [];
 let fichasJugador2 = [];
+let offsetXFicha = 0;
+let offsetYFicha = 0;
 let fichaAnterior = null;
 let margenWidth = 150; //espacio para la ubicacion de fichas
 let margenHeight = 100; //espacio arriba para depositar las fichas
@@ -163,15 +165,15 @@ function detectarYSeleccionar(event) {
                 }
                 else {
                     fichaAnterior.setSeleccionada(false);
-                }
+                }  
             }
             console.log("mi ficha: " + fichaSeleccionada);
             fichaSeleccionada.setSeleccionada(true);
             fichaAnterior = fichaSeleccionada;
-            //document.querySelector("#canvas").addEventListener("mousemove", arrastrarFicha);
+            document.querySelector("#canvas").addEventListener("mousemove", arrastrarFicha);
             document.querySelector("#canvas").addEventListener("mouseup", liberarEvento);
-            let offsetXFicha = posicionXClickeada - fichaSeleccionada.getPosX();
-            let offsetYFicha = posicionYClickeada - fichaSeleccionada.getPosY();
+            offsetXFicha = posicionXClickeada - fichaSeleccionada.getPosX();
+            offsetYFicha = posicionYClickeada - fichaSeleccionada.getPosY();
             console.log("offset ficha");
             console.log(offsetXFicha);
             console.log(offsetYFicha);
@@ -182,9 +184,26 @@ function detectarYSeleccionar(event) {
     }
 }
 
+function arrastrarFicha(event) {
+    let posicionXClickeada = event.clientX - posicionesIniciales.left;
+    let posicionYClickeada = event.clientY - posicionesIniciales.top;
+    fichaAnterior.setPosicion(posicionXClickeada - offsetXFicha, posicionYClickeada - offsetYFicha);
+    
+    if (!tablero.tableroExtendidoFueClickeado(posicionXClickeada, posicionYClickeada)) {
+        pintarExterior();
+        for (let index = 0; index < config.getColumnas(); index++) {
+            tablero.pintarJugada(-1, index, turnoJugador1); //dibuja fichas para orientar al usuario
+        }
+    }
+}
+
 function liberarEvento(event) {
     let posicionXClickeada = event.clientX - posicionesIniciales.left;
     let posicionYClickeada = event.clientY - posicionesIniciales.top;
+    document.querySelector("#canvas").removeEventListener("mousemove", arrastrarFicha);
+    document.querySelector("#canvas").removeEventListener("mouseup", liberarEvento);
+    offsetXFicha = 0;
+    offsetYFicha = 0;
     if (fichaAnterior != null) {
         let columnaAJugar = tablero.getColumnaAJugar(posicionXClickeada, posicionYClickeada);
         if (columnaAJugar >= 0) {
@@ -208,7 +227,20 @@ function jugar(ficha, columna){
             juego[fila][columna] = 2;
         }
         tablero.pintarJugada(fila, columna, turnoJugador1, ficha);
+        if (turnoJugador1) {
+            let fichaAEliminar = fichasJugador1.indexOf(fichaAnterior);
+            if (fichaAEliminar !== -1) {
+                fichasJugador1.splice(fichaAEliminar, 1);
+            }        
+        }
+        else {
+            let fichaAEliminar = fichasJugador2.indexOf(fichaAnterior);
+            if (fichaAEliminar !== -1) {
+                fichasJugador2.splice(fichaAEliminar, 1);
+            }
+        }
         fichaAnterior = null;
+        pintarExterior();
         if (revisarNEnLinea(juego, fila, columna, config.getCantidadParaGanar())) {
             let ganador;
             if (turnoJugador1) {
@@ -225,7 +257,6 @@ function jugar(ficha, columna){
         }
         else {
             turnoJugador1 = !turnoJugador1;
-
             mostrarTurno();
         }
     }
@@ -233,6 +264,30 @@ function jugar(ficha, columna){
         console.log("jugada invalida, vuelva a intentar");
     }
     console.table(juego);
+}
+
+function pintarExterior() {
+    ctx.beginPath();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, margenWidth, canvas.height);
+    ctx.beginPath();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(canvas.width - margenWidth, 0, margenWidth, canvas.height);
+    ctx.beginPath();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(margenWidth, 0, canvas.width - margenWidth, margenHeight);
+    //borde
+    ctx.beginPath();
+    ctx.strokeStyle = "#555555";
+    ctx.strokeRect(margenWidth - 2 * ficha.radio, 2 * ficha.radio, 500 + 4 * ficha.radio, 500 + 2 * ficha.radio);
+    
+    for (let index = 0; index < fichasJugador1.length; index++) {
+        fichasJugador1[index].dibujar();
+    }
+    for (let index = 0; index < fichasJugador2.length; index++) {
+        fichasJugador2[index].dibujar();
+    }
+    
 }
 
 function calcularProximaFila(mat, columna) {
