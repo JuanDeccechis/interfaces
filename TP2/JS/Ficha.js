@@ -5,7 +5,6 @@ class Ficha {
         this.posX = posX;
         this.posY = posY;
         this.radio = radio;
-        //this.color = color;
         this.imagen = imagen;
         this.imagenOriginal = imagen;
         this.context = context;
@@ -24,8 +23,6 @@ class Ficha {
             let posicion = this.getPosicion();
             let posicionFinX = posicion.x + 2 * this.radio;
             let posicionFinY = posicion.y + 2 * this.radio;
-            console.log("seleccionada: " + posicion.x + ", " + posicion.y);
-            console.log("seleccionadaFIN: " + posicionFinX + ", " + posicionFinY);
             this.setImagen(this.imagenSeleccionada);
             this.dibujar();
         } else {
@@ -57,10 +54,6 @@ class Ficha {
         return this.radio;
     }
 
-  /*  getColor() {
-        return this.color;
-    }
-*/
     getContext() {
         return this.context;
     }

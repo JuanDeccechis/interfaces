@@ -60,7 +60,6 @@ class Tablero {
            
     }
 
-    /* FUNCIONES PRIVADAS */
     getEspacioFicha(){
         return 2 * this.ficha.radio;
     }
@@ -108,7 +107,6 @@ class Tablero {
     }
 
     pintarJugada(fila, columna, turnoJugador1, ficha) {
-        //document.querySelectorAll(".columna")[columna].setAttribute("disabled", true);
         let margenWidth = 150; //espacio para la ubicacion de fichas
         let margenHeight = 100; //espacio arriba para depositar las fichas
         let tableroHeight = this.canvas.height - margenHeight;
@@ -163,4 +161,25 @@ class Tablero {
                 limpiarIntervalo ++;
         }}, 500);
     }
+
+    mostrarJugadaGanadora(columnaInicio, filaInicio, columnaFin, filaFin){
+        console.log(columnaInicio, filaInicio, columnaFin, filaFin);
+        let tableroHeight = this.canvas.height - this.margenHeight;
+        let tableroWidth = this.canvas.width - 2 * this.margenWidth;
+
+        let incrementoI = this.calcularIncremento(tableroHeight, this.getFilasTablero());
+        let incrementoJ = this.calcularIncremento(tableroWidth, this.getColumnasTablero()); 
+        let inicioColumnaGanador = incrementoJ * (columnaInicio + 0.5) + margenWidth;
+        let inicioFilaGanador = incrementoI * (filaInicio + 0.5) + margenHeight;
+        let finColumnaGanador = incrementoJ * (columnaFin + 0.5) + margenWidth;
+        let finFilaGanador = incrementoI * (filaFin + 0.5) + margenHeight;
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "#555555";
+        this.ctx.lineWidth = "5";
+        this.ctx.moveTo(inicioColumnaGanador, inicioFilaGanador);
+        this.ctx.lineTo(finColumnaGanador, finFilaGanador);
+        this.ctx.stroke();
+        
+    }
+        
 }

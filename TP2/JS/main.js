@@ -18,6 +18,7 @@ let offsetYFicha = 0;
 let fichaAnterior = null;
 let margenWidth = 150; //espacio para la ubicacion de fichas
 let margenHeight = 100; //espacio arriba para depositar las fichas
+let origenesDestinos = [null, null, null, null, null, null, null, null];
 let canvas = document.querySelector("#canvas");
 let ctx = this.canvas.getContext("2d");
 let ficha = {
@@ -80,16 +81,7 @@ function volverAConfigurar() {
 }
 
 function crearJuego() { //finaliza las configuraciones para poder jugar
-    let juegoHTML = document.querySelector("#botones");
-    let cantidadColumnasJuego = config.getColumnas();
     document.querySelector("#atras").removeAttribute("disabled");
-    /*for (let index = 0; index < cantidadColumnasJuego; index++) {
-        let elemento = document.createElement("BUTTON");
-        elemento.setAttribute("class", "columna");
-        elemento.innerHTML = `columna ${index}`;
-        elemento.addEventListener("click", () => jugar(index));
-        juegoHTML.appendChild(elemento);   
-    }*/
     juego = [];
     fichasJugador1 = [];
     fichasJugador2 = [];
@@ -104,7 +96,6 @@ function crearJuego() { //finaliza las configuraciones para poder jugar
     posicionesIniciales = document.querySelector("#canvas").getBoundingClientRect();
     tablero.crearTablero(config.getFilas(), config.getColumnas());
     mostrarTurno();
-    console.table(juego);
 }
 
 function mostrarTurno(debeMostrar){
@@ -131,20 +122,13 @@ function mostrarTurno(debeMostrar){
 function detectarYSeleccionar(event) {
     let posicionXClickeada = event.clientX - posicionesIniciales.left;
     let posicionYClickeada = event.clientY - posicionesIniciales.top;
-    console.log("posiciones del mouse respecto al canvas: ");
-    console.log(posicionXClickeada);
-    console.log(posicionYClickeada);
     
     let isTablero = tablero.tableroFueClickeado(posicionXClickeada, posicionYClickeada);
     if (!(isTablero)) {
-        /*if (indiceSeleccionadoAnterior !== -1) {
-            fichasJuego[indiceSeleccionadoAnterior].setSeleccionada(false);
-        }*/
         let fichaSeleccionada = null;
         if (turnoJugador1) {
             for (let index = 0; index < fichasJugador1.length; index++) {
                 if (fichasJugador1[index].fichaFueClickeada(posicionXClickeada, posicionYClickeada)) {
-                    console.log("ficha clickeada: " + index);
                     fichaSeleccionada = fichasJugador1[index];
                 }
             }
@@ -152,7 +136,6 @@ function detectarYSeleccionar(event) {
         else {
             for (let index = 0; index < fichasJugador2.length; index++) {
                 if (fichasJugador2[index].fichaFueClickeada(posicionXClickeada, posicionYClickeada)) {
-                    console.log("ficha clickeada: " + index);
                     fichaSeleccionada = fichasJugador2[index];
                 }
             }
@@ -161,26 +144,20 @@ function detectarYSeleccionar(event) {
             /*SET POSICION ANTERIOR PARA VOLVER*/
             if (fichaAnterior !== null) {
                 if (fichaSeleccionada === fichaAnterior) {
-                    console.log("ES LA MISMA FICHA");
                 }
                 else {
                     fichaAnterior.setSeleccionada(false);
                 }  
             }
-            console.log("mi ficha: " + fichaSeleccionada);
             fichaSeleccionada.setSeleccionada(true);
             fichaAnterior = fichaSeleccionada;
             document.querySelector("#canvas").addEventListener("mousemove", arrastrarFicha);
             document.querySelector("#canvas").addEventListener("mouseup", liberarEvento);
             offsetXFicha = posicionXClickeada - fichaSeleccionada.getPosX();
             offsetYFicha = posicionYClickeada - fichaSeleccionada.getPosY();
-            console.log("offset ficha");
-            console.log(offsetXFicha);
-            console.log(offsetYFicha);
-
         }        
     } else {
-        console.log("click en el tablero");
+        //console.log("click en el tablero");
     }
 }
 
@@ -248,7 +225,9 @@ function jugar(ficha, columna){
             } else {
                 ganador = document.querySelector("#jugador2").value;
             }
-            alert(`felicitaciones ${ganador}!!!`);
+            setTimeout(function(){ 
+                alert(`felicitaciones ${ganador}!!!`); 
+            }, 3000);
             document.querySelector("#atras").innerHTML = "volver a jugar";
             let elementos = document.querySelector("#botones");
             while (elementos.firstChild) {
@@ -261,9 +240,8 @@ function jugar(ficha, columna){
         }
     }
     else {
-        console.log("jugada invalida, vuelva a intentar");
+        alert("jugada invalida, vuelva a intentar");
     }
-    console.table(juego);
 }
 
 function pintarExterior() {
@@ -302,13 +280,26 @@ function calcularProximaFila(mat, columna) {
 
 function revisarNEnLinea(juego, fila, columna, cantidad) { //podria hacer una funcion recursiva, pero dada la cantidad de filas y columnas no lo veo necesario
     let resultado = false;
+    origenesDestinos = [null, null, null, null, null, null, null, null];
     let cantidadEnVertical = revisarNEnLineaDireccion(juego, fila, columna, "vertical");
     let cantidadEnHorizontal = revisarNEnLineaDireccion(juego, fila, columna, "horizontal");
     let cantidadEnDiag1 = revisarNEnLineaDireccion(juego, fila, columna, "diagonal1");
     let cantidadEnDiag2 = revisarNEnLineaDireccion(juego, fila, columna, "diagonal2");
     if ((cantidadEnVertical >= cantidad) || (cantidadEnHorizontal >= cantidad) || (cantidadEnDiag1 >= cantidad) || (cantidadEnDiag2 >= cantidad)) {
         resultado = true;
-    }
+        if (cantidadEnVertical >= cantidad) {
+            tablero.mostrarJugadaGanadora(columna, origenesDestinos[0], columna, origenesDestinos[1]);
+        }
+        if (cantidadEnHorizontal >= cantidad) {
+            tablero.mostrarJugadaGanadora(origenesDestinos[2], fila, origenesDestinos[3], fila);
+        }
+        if (cantidadEnDiag1 >= cantidad) {
+            tablero.mostrarJugadaGanadora(origenesDestinos[4], fila + columna - origenesDestinos[4], origenesDestinos[5], fila + columna - origenesDestinos[5]);
+        }
+        if (cantidadEnDiag2 >= cantidad) {
+            tablero.mostrarJugadaGanadora(origenesDestinos[6], fila + origenesDestinos[6] - columna, origenesDestinos[7], fila + origenesDestinos[7] - columna);
+        }
+      }
     return resultado;
 
 }
@@ -333,6 +324,7 @@ function buscarOrigen(juego, fila, columna, direccion) {
     switch (direccion) {
         case "vertical":
             resultado = fila;
+            origenesDestinos[0] = resultado;
             break;
         case "horizontal":
             for (let indiceColumna = columna; indiceColumna >= 0 ; indiceColumna--) {
@@ -344,6 +336,7 @@ function buscarOrigen(juego, fila, columna, direccion) {
             if (seguirBuscando && juego[fila][0] === juego[fila][columna]) {
                 resultado = 0;
             }
+            origenesDestinos[2] = resultado;
             break;
         case "diagonal1": //abajo izq
             for (let indiceColumna = columna; indiceColumna >= 0 ; indiceColumna--) {
@@ -364,6 +357,7 @@ function buscarOrigen(juego, fila, columna, direccion) {
             if (seguirBuscando && (fila+columna) <= (config.getFilas() -1) && juego[fila+columna][0] === juego[fila][columna]) {
                 resultado = 0;
             }
+            origenesDestinos[4] = resultado;
             break;
         
         case "diagonal2": //arriba izq
@@ -385,12 +379,12 @@ function buscarOrigen(juego, fila, columna, direccion) {
                 if (seguirBuscando && (fila-columna) >= 0 && juego[fila-columna][0] === juego[fila][columna]) {
                     resultado = 0;
                 }
+                origenesDestinos[6] = resultado;
                 break;
 
         default:
             break;
     }
-    console.log("origen: " + direccion + " - " + resultado);
     return resultado;
 }
 
@@ -409,6 +403,7 @@ function buscarFin(juego, fila, columna, direccion) {
             if (seguirBuscando && juego[(config.getFilas() - 1)][columna] === juego[fila][columna]) {
                 resultado = (config.getFilas() - 1);
             }
+            origenesDestinos[1] = resultado
             break;
         case "horizontal":
             for (let indiceColumna = columna; indiceColumna < config.getColumnas() ; indiceColumna++) {
@@ -420,6 +415,7 @@ function buscarFin(juego, fila, columna, direccion) {
             if (seguirBuscando && juego[fila][config.getColumnas() -1] === juego[fila][columna]) {
                 resultado = config.getColumnas() -1;
             }
+            origenesDestinos[3] = resultado;
             break;
         case "diagonal1": //arriba derecha
             for (let indiceColumna = columna; indiceColumna < config.getColumnas() ; indiceColumna++) {
@@ -440,6 +436,7 @@ function buscarFin(juego, fila, columna, direccion) {
             if (seguirBuscando && (fila+columna - (config.getColumnas() - 1)) >= 0 && juego[fila+columna-(config.getColumnas() -1 )][config.getColumnas() - 1] === juego[fila][columna]) {
                 resultado = config.getColumnas() -1;
             }
+            origenesDestinos[5] = resultado;
             break;
 
         case "diagonal2": //arriba izq
@@ -461,12 +458,12 @@ function buscarFin(juego, fila, columna, direccion) {
             if (seguirBuscando && (fila-columna + (config.getColumnas() -1) ) >= 0 && juego[fila-columna+ (config.getColumnas() -1)][(config.getColumnas() -1)] === juego[fila][columna]) {
                 resultado = config.getColumnas() -1;
             }
+            origenesDestinos[7] = resultado;
             break;
 
         default:
             break;
     }
-    console.log("fin: " + direccion + " - " + resultado);
     return resultado;
 }
 
@@ -479,7 +476,6 @@ function crearFichas(){
     for (let index = 0; index < fichas; index++) {
         posicionXEnCrearFicha = calcularRandomLimitado(0, margenWidth - 4 * ficha.radio); //entre 0 - 100
         posicionYEnCrearFicha = calcularRandomLimitado(margenHeight, canvas.height - 2 * ficha.radio);
-        console.log("posicion: " + posicionXEnCrearFicha + ", " + posicionYEnCrearFicha);
         objetoFicha = new Ficha(posicionXEnCrearFicha, posicionYEnCrearFicha, ficha.radio, imagenFichaRoja, imagenFichaVerde, ctx);
         objetoFicha.dibujar();
         fichasJugador1.push(objetoFicha);
