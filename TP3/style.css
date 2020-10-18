@@ -65,4 +65,7 @@
     animation: cargando 3s linear;
 }
 
-
+footer {
+    position: fixed; /*posicion fija en la pantalla*/
+    bottom: 0;
+}

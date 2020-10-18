@@ -3,6 +3,15 @@
 let heightNav = 0;
 let seccionActual = 0;
 let prevScroll = 0;
+let fechaEstreno = new Date(2020, 11, 24);
+let fechaActual = new Date();
+let fechaDiferencia;
+let fechaAMostrar = document.querySelector(".fechaEstreno");
+setInterval(() => {
+    fechaActual = new Date();
+    fechaDiferencia = new Date(fechaEstreno - fechaActual);
+    fechaAMostrar.innerHTML = fechaDiferencia.getMonth() + " meses, " + fechaDiferencia.getDate() + " dias, y " + fechaDiferencia.getHours() + ":" + fechaDiferencia.getMinutes() + ":" + fechaDiferencia.getSeconds();
+}, 1000);
 
 document.addEventListener("scroll", getScroll);
 document.addEventListener("DOMContentLoaded", cargar);
@@ -146,3 +155,4 @@ function getScrollY() {
     } 
     return scrOfY;
 }
+
