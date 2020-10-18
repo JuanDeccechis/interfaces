@@ -33,6 +33,7 @@ function cargar() {
         }
         document.querySelector(".imagenCargando").classList.add("oculto");
         document.querySelector(".imagenCargando").classList.remove("cargando");
+        setheightNav();
     }, 3000);
     
 }
