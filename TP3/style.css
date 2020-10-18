@@ -168,3 +168,51 @@ p{
     background-image: url("img/escenaG.jpg");
     background-size: cover;
 }
+
+@keyframes animaEntradaFormulario {
+    from {margin-top: 100vh;}
+    to {margin-top: 0;}
+}
+
+.formularioComentarios {
+    width: 80%;
+    margin: 0% 10%;
+    padding-top: 150px;
+}
+
+.animaEntradaFormulario {
+    transform: translate(0px, -100px);
+    transition: transform 3s;
+}
+
+.comentar {
+    border-radius: 15px;
+    transition: transform 0.5s;
+}
+
+    .comentar:hover {
+        animation-name: quitarTransparencia;
+        animation-duration: 1.5s;
+    }
+
+    .comentar:active {
+        transform: translate(0px, 5px);
+    }
+
+.publicar {
+    transform-origin: left center;
+    transition: transform 1.5s;
+}
+
+.publicar:hover {
+    transform: scale(1.25);
+}
+
+.form-control:focus {
+    background-color: lightblue;
+    font-weight: bold;
+}
+
+.form-control:invalid {
+    color: red;
+}

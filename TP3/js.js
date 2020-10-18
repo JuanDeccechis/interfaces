@@ -69,34 +69,40 @@ function getScroll(evt) {
     switch (caso) {
         case 1:
             console.log("baja seccion 1");
+            document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             seccionActual = 1;
             break;
         case 2:
             console.log("baja seccion 2");
+            document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             document.querySelector(".pag1").classList.add("animaEntrada1");
             seccionActual = 2;
             break;
         case 3:
             console.log("baja seccion 3");
+            document.querySelector(".formularioComentarios").classList.add("animaEntradaFormulario");
             document.querySelector(".pag2").classList.add("animaEntrada2");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             break;
 
         case 11:
             console.log("sube seccion 1");
+            document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             break;
         case 12:
             console.log("sube seccion 2");
+            document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             document.querySelector(".pag1").classList.add("animaEntrada1");
             break;
         case 13:
             console.log("sube seccion 3");
+            document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             break;
@@ -188,9 +194,17 @@ for (let index = 0; index < cards.length; index++) {
 
 function rotarCard(elemento, evento) {
     let posiciones = elemento.getBoundingClientRect();
-    //roto 1/5 y 1/3 de la diferencia entre el centro del card y donde clickea adentro del card
+    //roto 1/5 y 1/10 de la diferencia entre el centro del card y donde clickea adentro del card
     let xAxis = (posiciones.width / 2 - (evento.clientX - posiciones.x)) / 5;
     let yAxis = (posiciones.height / 2 - (evento.clientY - posiciones.y)) / 10;
     
     elemento.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
 };
+
+document.querySelector(".comentar").addEventListener("click", detener);
+document.querySelector(".publicar").addEventListener("click", detener);
+
+function detener(event) {
+    event.preventDefault();
+    console.log("detener");
+}
