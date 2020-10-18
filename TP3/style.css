@@ -1,0 +1,68 @@
+@keyframes desplazarDesdeDerecha {
+    from {left: 100%;}
+    to {left: 0;}
+}
+
+@keyframes quitarTransparencia {
+    from {opacity: 0;}
+    to {opacity: 100%;}
+}
+
+.hero {
+    height: 150vh;
+    width: 100%;
+    background-color: red;
+    opacity: 0.5;
+    position: absolute;
+}
+
+.animaEntrada1 {
+    animation-name: desplazarDesdeDerecha;
+    animation-duration: 2s;
+}
+
+.animaEntrada2 {
+    animation-name: quitarTransparencia;
+    animation-duration: 2s;
+}
+
+.pag1 {
+    height: 150vh;
+    width: 100%;
+    position: relative;
+    top: 150vh;
+    background-color: blue;
+    opacity: 0.5;
+}
+
+.pag2 {
+    height: 150vh;
+    width: 100%;
+    top: 150vh;
+    position: relative;
+    background-color: green;
+    opacity: 0.5;
+}
+
+.oculto {
+    display: none;
+}
+
+
+@keyframes cargando {
+    0% { max-width: 0; }
+    100% { max-width: 300px; }
+}
+
+.cargando {
+    width: 300px;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    height: 260px;
+    background-image: url("img/barco1.png");
+    background-size: cover;
+    animation: cargando 3s linear;
+}
+
+
