@@ -3,6 +3,7 @@
 let heightNav = 0;
 let seccionActual = 0;
 let prevScroll = 0;
+let prevAcordion = -1;
 let fechaEstreno = new Date(2020, 11, 24);
 let fechaActual = new Date();
 let fechaDiferencia;
@@ -207,4 +208,21 @@ document.querySelector(".publicar").addEventListener("click", detener);
 function detener(event) {
     event.preventDefault();
     console.log("detener");
+}
+
+let acordiones = document.querySelectorAll(".accordion-title");
+for (let index = 0; index < acordiones.length; index++) {
+    acordiones[index].addEventListener("click", () => desplegarAcordion(index));    
+}
+
+function desplegarAcordion(numeroAcordion) {
+    console.log("llega " + numeroAcordion);
+    let contenidos = document.querySelectorAll(".accordion-content");
+    if (prevAcordion >= 0) {
+        contenidos[prevAcordion].classList.remove("animaAccordion");
+    }
+    setTimeout(() => {
+        contenidos[numeroAcordion].classList.add("animaAccordion");
+    }, 1000);
+    prevAcordion = numeroAcordion;
 }

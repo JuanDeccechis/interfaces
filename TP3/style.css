@@ -8,6 +8,10 @@
     to {opacity: 100%;}
 }
 
+html {
+    scroll-behavior: smooth; /*desplzamiento suavizado*/
+}
+
 .hero {
     height: 150vh;
     width: 100%;
@@ -177,11 +181,11 @@ p{
 .formularioComentarios {
     width: 80%;
     margin: 0% 10%;
-    padding-top: 150px;
+    padding-top: 70px;
 }
 
 .animaEntradaFormulario {
-    transform: translate(0px, -100px);
+    transform: translate(0px, -50px);
     transition: transform 3s;
 }
 
@@ -216,3 +220,25 @@ p{
 .form-control:invalid {
     color: red;
 }
+
+.accordion-content {
+    max-height: 0;
+    height: auto;
+    overflow: hidden;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+    transition-property: max-height;
+}
+
+.animaAccordion {
+    max-height: 320px;
+    transition-duration: 1s;
+    transition-timing-function: ease-in;
+    transition-property: max-height;
+}
+
+.accordion-content img{
+    max-height: 300px;
+}
+
+
