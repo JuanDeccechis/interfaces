@@ -90,16 +90,6 @@ footer {
     justify-content: center;
     align-items: center;
 }
-    .card:after{
-        content: '';
-        position: absolute;
-        width:100%;
-        height: 8px;
-        border-radius: 50%;
-        left: 0;
-        bottom: 0px;
-        box-shadow: 0 30px 20px rgba(0, 0, 0, .5);
-    }
 
 
 .card-content{
@@ -237,8 +227,20 @@ p{
     transition-property: max-height;
 }
 
-.accordion-content img{
-    max-height: 300px;
+.accordionCard {
+    height: 250px;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    position: relative;
+    transform-origin: left top;
+    transition: transform 0.5s;
+    z-index: 1;
 }
 
-
+.accordionCard:hover {
+    /**transform: rotate3d(0.5, 0.5, 1);*/
+    transform: rotateX(10deg);
+    transform: rotateY(10deg);
+    transform: rotateZ(10deg);
+  }
+  
