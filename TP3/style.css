@@ -12,12 +12,11 @@ html {
     scroll-behavior: smooth; /*desplzamiento suavizado*/
 }
 
-.hero {
+.hero, .pag1, .pag2 {
     height: 150vh;
     width: 100%;
     background-color: red;
-    opacity: 0.5;
-    position: absolute;
+    position: relative;
 }
 
 .animaEntrada1 {
@@ -28,24 +27,6 @@ html {
 .animaEntrada2 {
     animation-name: quitarTransparencia;
     animation-duration: 2s;
-}
-
-.pag1 {
-    height: 150vh;
-    width: 100%;
-    position: relative;
-    top: 150vh;
-    background-color: blue;
-    opacity: 0.5;
-}
-
-.pag2 {
-    height: 150vh;
-    width: 100%;
-    top: 150vh;
-    position: relative;
-    background-color: green;
-    opacity: 0.5;
 }
 
 .oculto {
@@ -95,18 +76,46 @@ footer {
 .card-content{
     transform-style: preserve-3d;
     text-align: center;
+    height: 70%;
+    width: 100%;
+}
+
+.cardImagen{
+    width: 100%;
+    height: 100%;
+    transform: translateZ(100px);
+}
+
+.Jack {
+    background-image: url("img/Jack_Sparrow.png");
+    background-size: cover;
+}
+
+.Will {
+    background-image: url("img/Will_Turner.png");
+    background-size: cover;
+}
+
+.Davy {
+    background-image: url("img/Davy_Jones.png");
+    background-size: cover;
+}
+
+.Elizabeth {
+    background-image: url("img/Elizabeth_Turner.png");
+    background-size: cover;
 }
 
 h1{
     color: #FFF;
-    transform: translateZ(100px);
+    transform: translateZ(10px);
 }
   
-p{
+/*p{
     color: #FFF;
     transform: translateZ(50px);
 }
-
+*/
 .containerCarousel {
     margin-top: 20px;
     width: 100%;
@@ -119,46 +128,36 @@ p{
     margin-left: 10%;
 }
 
-.escenaA {
+.carousel-item {
     width: 100%;
     height: 100%;
+}
+.escenaA {
     background-image: url("img/escenaA.jpeg");
     background-size: cover;
 }
 
 .escenaB {
-    width: 100%;
-    height: 100%;
     background-image: url("img/escenaB.jpg");
     background-size: cover;
 }
 .escenaC {
-    width: 100%;
-    height: 100%;
     background-image: url("img/escenaC.jpg");
     background-size: cover;
 }
 .escenaD {
-    width: 100%;
-    height: 100%;
     background-image: url("img/escenaD.jpg");
     background-size: cover;
 }
 .escenaE {
-    width: 100%;
-    height: 100%;
     background-image: url("img/escenaE.jpg");
     background-size: cover;
 }
 .escenaF {
-    width: 100%;
-    height: 100%;
     background-image: url("img/escenaF.jpeg");
     background-size: cover;
 }
 .escenaG {
-    width: 100%;
-    height: 100%;
     background-image: url("img/escenaG.jpg");
     background-size: cover;
 }
