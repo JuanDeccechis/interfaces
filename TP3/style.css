@@ -229,7 +229,7 @@ p{
 
 .accordionCard {
     height: 250px;
-    transition: transform 1s;
+    width: 500px;
     transform-style: preserve-3d;
     position: relative;
     transform-origin: left top;
