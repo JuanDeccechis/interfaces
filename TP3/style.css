@@ -23,6 +23,47 @@ body {
     position: relative;
 }
 
+.navOculto {
+    max-height: 0;
+    height: auto;
+    overflow: hidden;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+    transition-property: max-height;
+}
+
+.navVisible {
+    max-height: 320px;
+    transition-duration: 1s;
+    transition-timing-function: ease-in;
+    transition-property: max-height;
+}
+
+.listaNav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navItem {
+    height: 40px;
+    padding: 5px;
+}
+
+.navLink {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+      
+/* Change the link color to #111 (black) on hover */
+.navLink:hover {
+    background-color: #CCC;
+    opacity: 0.4;
+}
+
 .animaEntrada1 {
     animation-name: desplazarDesdeDerecha;
     animation-duration: 2s;

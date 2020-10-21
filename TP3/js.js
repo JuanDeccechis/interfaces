@@ -227,3 +227,10 @@ function desplegarAcordion(numeroAcordion) {
     }, 1000);
     prevAcordion = numeroAcordion;
 }
+
+document.querySelector(".navButton").addEventListener("click", toggleNav);
+
+function toggleNav() {
+    document.querySelector(".navOcultable").classList.toggle("navOculto");
+    document.querySelector(".navOcultable").classList.toggle("navVisible");
+}
