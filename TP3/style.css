@@ -8,14 +8,18 @@
     to {opacity: 100%;}
 }
 
-html {
+body {
     scroll-behavior: smooth; /*desplzamiento suavizado*/
+    height: 550vh;
+    opacity: 2;
+    background-image: url("img/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .hero, .pag1, .pag2 {
     height: 150vh;
     width: 100%;
-    background-color: red;
     position: relative;
 }
 
