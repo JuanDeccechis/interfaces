@@ -4,7 +4,7 @@
 }
 
 @keyframes quitarTransparencia {
-    from {opacity: 0;}
+    from {opacity: 40%;}
     to {opacity: 100%;}
 }
 
@@ -220,7 +220,7 @@ h1{
 }
 
 .animaEntradaFormulario {
-    transform: translate(0px, -50px);
+    transform: translate(0px, -20px);
     transition: transform 3s;
 }
 
