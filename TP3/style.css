@@ -87,10 +87,10 @@ body {
 
 .cargando {
     width: 300px;
-    position: fixed;
-    top: 50vh;
-    left: 50vw;
     height: 260px;
+    position: fixed;
+    top: calc(50vh - 130px);
+    left: calc(50vw - 150px);
     background-image: url("img/barco1.png");
     background-size: cover;
     animation: cargando 3s linear;
