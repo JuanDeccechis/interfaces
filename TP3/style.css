@@ -15,6 +15,7 @@ body {
     background-image: url("img/fondo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    padding-left: 10px;
 }
 
 .hero, .pag1, .pag2 {
@@ -289,6 +290,12 @@ h1{
     transform: rotateZ(10deg);
 }
 
+.navButton {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+}
+
 @keyframes animaGradienteColores {
     0% {background-color: #CCC;}
     10% {background-color: aquamarine;}
@@ -307,4 +314,14 @@ h1{
     color: red;
     animation: animaGradienteColores 15s linear infinite;
 }
-  
+
+.introduccion {
+    background-color: white;
+    margin: 2% 10%;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+
+.imagenMenu {
+    height: 50px;
+}
