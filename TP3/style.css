@@ -287,5 +287,24 @@ h1{
     transform: rotateX(10deg);
     transform: rotateY(10deg);
     transform: rotateZ(10deg);
-  }
+}
+
+@keyframes animaGradienteColores {
+    0% {background-color: #CCC;}
+    10% {background-color: aquamarine;}
+    20% {background-color: lightskyblue}
+    30% {background-color: lightseagreen}
+    40% {background-color: mediumblue}
+    50% {background-color: blue}
+    60% {background-color: lightseagreen}
+    70% {background-color: limegreen}
+    80% {background-color: lightgreen}
+    90% {background-color: lightyellow}
+    100% {background-color: #CCC}
+    
+}
+.visualizarComentarios {
+    color: red;
+    animation: animaGradienteColores 15s linear infinite;
+}
   
