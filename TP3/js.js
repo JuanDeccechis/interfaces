@@ -8,10 +8,38 @@ let fechaEstreno = new Date(2020, 11, 24);
 let fechaActual = new Date();
 let fechaDiferencia;
 let fechaAMostrar = document.querySelector(".fechaEstreno");
+let horaAMostrar = document.querySelector(".horaEstreno");
+let minutoAMostrar = document.querySelector(".minutoEstreno");
+let segundoAMostrar = document.querySelector(".segundoEstreno");
+let diferenciaSegundos = 0;
+let diferenciaMinutos = 0;
+let diferenciaHoras = 0;
 setInterval(() => {
     fechaActual = new Date();
     fechaDiferencia = new Date(fechaEstreno - fechaActual);
-    fechaAMostrar.innerHTML = fechaDiferencia.getMonth() + " meses, " + fechaDiferencia.getDate() + " dias, y " + fechaDiferencia.getHours() + ":" + fechaDiferencia.getMinutes() + ":" + fechaDiferencia.getSeconds();
+    fechaAMostrar.innerHTML = fechaDiferencia.getMonth() + " meses, " + fechaDiferencia.getDate() + " dias, y "; 
+    diferenciaSegundos = fechaDiferencia.getSeconds();
+    diferenciaMinutos = fechaDiferencia.getMinutes();
+    diferenciaHoras = fechaDiferencia.getHours();
+    if (diferenciaSegundos < 10) {
+        diferenciaSegundos = '0' + diferenciaSegundos;
+    }
+    if (diferenciaMinutos < 10) {
+        diferenciaMinutos = '0' + diferenciaMinutos;
+    }
+    if (diferenciaHoras < 10) {
+        diferenciaHoras = '0' + diferenciaHoras;
+    }
+    segundoAMostrar.innerHTML = diferenciaSegundos;
+    minutoAMostrar.innerHTML = diferenciaMinutos;
+    horaAMostrar.innerHTML = diferenciaHoras;
+    segundoAMostrar.classList.toggle("cambiaValor");
+    if (diferenciaSegundos === 59) {
+        minutoAMostrar.classList.toggle("cambiaValor");
+    }
+    if (diferenciaMinutos === 59) {
+        horaAMostrar.classList.toggle("cambiaValor");
+    }
 }, 1000);
 
 document.addEventListener("scroll", getScroll);
@@ -45,14 +73,12 @@ function recargar(param) {
     setTimeout(() => {
         window.innerHeight * param + heightNav;
         window.scrollTo(0,  window.innerHeight * param + heightNav);
-        console.log(window.innerHeight * param + heightNav);
     }, 3000);
 }
 
 function setheightNav() {
     setTimeout(() => {
         heightNav = document.querySelector("header").offsetHeight;
-        console.log(heightNav);
     }, 350);
 }
 
@@ -70,40 +96,34 @@ function getScroll(evt) {
     
     switch (caso) {
         case 1:
-            console.log("baja seccion 1");
             document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             seccionActual = 1;
             break;
         case 2:
-            console.log("baja seccion 2");
             document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             document.querySelector(".pag1").classList.add("animaEntrada1");
             seccionActual = 2;
             break;
         case 3:
-            console.log("baja seccion 3");
             document.querySelector(".formularioComentarios").classList.add("animaEntradaFormulario");
             document.querySelector(".pag2").classList.add("animaEntrada2");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             break;
 
         case 11:
-            console.log("sube seccion 1");
             document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             break;
         case 12:
-            console.log("sube seccion 2");
             document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             document.querySelector(".pag1").classList.add("animaEntrada1");
             break;
         case 13:
-            console.log("sube seccion 3");
             document.querySelector(".formularioComentarios").classList.remove("animaEntradaFormulario");
             document.querySelector(".pag2").classList.remove("animaEntrada2");
             document.querySelector(".pag1").classList.remove("animaEntrada1");
@@ -208,7 +228,6 @@ document.querySelector(".publicar").addEventListener("click", detener);
 
 function detener(event) {
     event.preventDefault();
-    console.log("detener");
 }
 
 let acordiones = document.querySelectorAll(".accordion-title");
@@ -217,7 +236,6 @@ for (let index = 0; index < acordiones.length; index++) {
 }
 
 function desplegarAcordion(numeroAcordion) {
-    console.log("llega " + numeroAcordion);
     let contenidos = document.querySelectorAll(".accordion-content");
     if (prevAcordion >= 0) {
         contenidos[prevAcordion].classList.remove("animaAccordion");
@@ -233,4 +251,9 @@ document.querySelector(".navButton").addEventListener("click", toggleNav);
 function toggleNav() {
     document.querySelector(".navOcultable").classList.toggle("navOculto");
     document.querySelector(".navOcultable").classList.toggle("navVisible");
+}
+
+document.querySelector(".prueba").addEventListener("click", runPrueba);
+function runPrueba() {
+    document.querySelector(".prueba").classList.toggle("agregado");
 }

@@ -325,3 +325,37 @@ h1{
 .imagenMenu {
     height: 50px;
 }
+
+.miFooter {    
+    transform-style: preserve-3d;
+    transform-origin: center top;
+    display: inline;
+}
+
+.horaEstreno, .minutoEstreno, .segundoEstreno, .separacion1, .separacion2 {
+    position: fixed;
+    bottom: 8px;
+}
+
+.cambiaValor {
+    transform: rotateX(360deg);
+}
+
+.segundoEstreno {
+    left: 390px;
+    transition: transform 0.3s;
+}
+.separacion2{
+    left: 385px;
+}
+.minutoEstreno {
+    left: 365px;
+    transition: transform 3s;
+}
+.separacion1{
+    left: 360px;
+}
+.horaEstreno {
+    left: 340px;
+    transition: transform 3s;
+}
