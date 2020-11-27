@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/interfaces/TP5/hello/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/interfaces/TP5/hello/static/js/main.a97db2c1.chunk.js",
+    "main.js.map": "/interfaces/TP5/hello/static/js/main.a97db2c1.chunk.js.map",
+    "runtime-main.js": "/interfaces/TP5/hello/static/js/runtime-main.28e96e44.js",
+    "runtime-main.js.map": "/interfaces/TP5/hello/static/js/runtime-main.28e96e44.js.map",
+    "static/js/2.b162706d.chunk.js": "/interfaces/TP5/hello/static/js/2.b162706d.chunk.js",
+    "static/js/2.b162706d.chunk.js.map": "/interfaces/TP5/hello/static/js/2.b162706d.chunk.js.map",
+    "static/js/3.ce4c765d.chunk.js": "/interfaces/TP5/hello/static/js/3.ce4c765d.chunk.js",
+    "static/js/3.ce4c765d.chunk.js.map": "/interfaces/TP5/hello/static/js/3.ce4c765d.chunk.js.map",
+    "index.html": "/interfaces/TP5/hello/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/interfaces/TP5/hello/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.b162706d.chunk.js.LICENSE.txt": "/interfaces/TP5/hello/static/js/2.b162706d.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/interfaces/TP5/hello/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.28e96e44.js",
+    "static/js/2.b162706d.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.a97db2c1.chunk.js"
+  ]
+}
