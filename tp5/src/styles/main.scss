@@ -12,22 +12,26 @@ html {
 .player {
     background-color: $primary-color;
     position: fixed;
-    top: 0;
-    bottom: auto;
-    left: auto;
+    left: 0;
     right: 0;
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
-    height: 50px;
-
+    height: 10vh;
+    
+    @media (min-width: 900px) {
+        height: 6vh;
+    }
     svg {
         fill: $white;
     }
 }
 
+
 .toolbar {
     z-index: 3;
+    top: 0;
+    bottom: auto;
 
     >svg {
         margin-left: 2rem;
@@ -51,9 +55,6 @@ html {
 .player {
     top: auto;
     bottom: 0;
-    left: auto;
-    right: 0;
-    width: 100%;
     justify-content: space-between;
 
     svg {
@@ -77,27 +78,29 @@ html {
 
 .menu, .menuDesplegable {
     position: absolute;
-    width: 100%;
+    width: 100vw;
     background-color: $bkg-color;
+    
+    @media (min-width: 900px) {
+        height: auto;
+        width: 30vw; //capaz quitar
+    }
 }
 
 .menuDesplegable {
-    top: 50px;
+    top: 10vh;
     opacity: 1;
-    min-height: 100vh;
-    height: 100vh;
-    
-    
+    height: 80vh;
     @media (min-width: 900px) {
-        min-height: 100px;
-        height: auto;
+        top: 6vh;
+        height: 88vh;
     }
 }
 
 .carrousel-simple {
 
     >h2 {
-        @extend .section-title;
+        @extend .section-title !optional;
     }
 
     >.content {
@@ -148,11 +151,16 @@ h2.section-title {
     margin: 4rem;
 }
 
-.page {
-    margin: 4rem 0;
-    padding: 0;
-    background-color: $bkg-color;
+
+.page{
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    @media (min-width: 900px) {
+        padding-top: 6vh;
+        padding-bottom: 6vh;
+    }
 }
+
 
 .popup {
     background-color: $white;
@@ -230,10 +238,10 @@ h2.section-title {
     }
 }
 
-
 .container-information {
     display: flex;
     justify-content: space-around;
+    padding: 10px;
     background-color: transparentize($primary-color, .4);
     .information-title {
         font-weight: bold;
@@ -385,4 +393,8 @@ textarea{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.rotate{
+    transform: rotate(90deg);
 }

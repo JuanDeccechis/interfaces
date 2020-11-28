@@ -9,11 +9,19 @@ import Accordion from '@material-ui/core/Accordion';
 import ListItemDetail from "./ListItemDetail";
 
 export default function ListItem({ data, listType }) {
+    const [effect, setEffect] = React.useState(false);
+        
 
     const getFirstIcon = () => {
+        let classRotate = "";
+        if (effect) {
+            classRotate = "rotate";
+        } else {
+            classRotate = "";
+        }
         switch (listType) {
             case "playlist":
-                return <PlayArrowIcon />
+                return <PlayArrowIcon className={classRotate}/>
             case "edit":
                 return <DragIndicatorIcon />
             default:
@@ -21,14 +29,20 @@ export default function ListItem({ data, listType }) {
         }
     }
 
+    const handleClick = () => {
+        console.log(effect);
+        setEffect(!effect);
+
+    }
 
     return (
-        <Accordion className={`list-item ${listType}`}>
+        <Accordion className={`list-item ${listType}` }>
             <ListItemMaterial button>
                 <AccordionSummary
                     expandIcon={<MoreHorizIcon />}
                     aria-controls="list-content"
                     id="list-header"
+                    onClick={handleClick}
                 >
                     <ListItemIcon>
                         {getFirstIcon()}
