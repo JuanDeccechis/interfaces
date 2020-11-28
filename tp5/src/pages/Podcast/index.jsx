@@ -2,10 +2,10 @@ import React from "react";
 import {Comments, Information, Presentation} from "../../components";
 import { commentsMockup, informationTitlesMockup, informationDataMockup } from "./mocks"
 
-const Song = () => (
+const Podcast = () => (
     <div className="page">
         <div className="page-content">
-            <Presentation title="Safaera" subtitle="Bad Bunny"/>
+            <Presentation title="La sociedad de Thule" subtitle="Sociedades secretas"/>
             <div className="information">
                 <Information titles={informationTitlesMockup} details={informationDataMockup}/>
             </div>
@@ -17,4 +17,4 @@ const Song = () => (
 )
 
 
-export default Song;
+export default Podcast;

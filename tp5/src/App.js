@@ -1,10 +1,11 @@
-import { Routes } from "./components";
+import { Player, Routes, Toolbar } from "./components";
 
 const App = () => {
   return (
     <>
-      <h1>holaa</h1>
+      <Toolbar />
       <Routes />
+      <Player />
     </>
   );
 }
