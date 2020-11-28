@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const Simple = ({ title, cards }) => (
-    <div className="carrousel-simple">
+    <div className="carrousel-simple container">
         <Typography component="h2" variant="h3" >
             {title}
         </Typography>
