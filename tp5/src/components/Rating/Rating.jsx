@@ -20,7 +20,7 @@ export default function Rating() {
     };
 
     return (
-        <div className="options">
+        <div className="rating">
             {!show ?
                 <div className="show-more">
                         <StarBorderIcon onClick={() => setOpenDetails(true)} />

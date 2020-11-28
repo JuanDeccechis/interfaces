@@ -71,8 +71,6 @@ html {
 
         .show-more-icon {
             font-size: 1rem;
-
-
         }
     }
 }
@@ -329,11 +327,11 @@ textarea{
 
 .presentation{
     display: flex;
-    flex-direction: row;
-}
-
-.image{
-    width: 20%;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 900px) {
+        flex-direction: row;
+    }
 }
 
 .page-content{
@@ -348,8 +346,18 @@ textarea{
     color: $white;
 }
 
+.songInfo{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @media (min-width: 900px) {
+        justify-content: space-around;
+    }
+}
+
 .songTitle{
-    width: 50%;
+    width: 100%;
     font-size: 20px;
     line-height: 35px;
     letter-spacing: 2px;
@@ -366,4 +374,15 @@ textarea{
     text-align: center;
     letter-spacing: 2px;
 
+}
+
+
+.rating{
+    margin-top: 100%;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }

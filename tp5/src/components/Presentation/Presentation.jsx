@@ -2,6 +2,7 @@ import React from "react";
 import CardMedia from '@material-ui/core/CardMedia';
 import { songMockup} from "./mocks"
 import Options from "../Options/Options";
+import Rating from "../Rating/Rating";
 
 const Presentation = ({title, subtitle}) => (
     <div className="presentation">
@@ -13,13 +14,12 @@ const Presentation = ({title, subtitle}) => (
                     className="card-image"
                 />
         </div>
-        <div className="songTitle">
-                {title}
-            <div className="songSubitle">
-                {subtitle}
+        <div className="songInfo">
+            <div>
+                <h2> {title} </h2>
+                <body1> {subtitle} </body1>
+                <Rating />
             </div>
-        </div>
-        <div>
             <Options />
         </div>
     </div>
