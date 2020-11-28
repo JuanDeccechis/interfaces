@@ -7,7 +7,7 @@ import {
 import { Home, Song } from "../../pages";
 
 const Routes = () => (
-    <Router basename='/interfaces/tp5'>
+    <Router basename='/interfaces'>
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/song" component={Song} />
