@@ -7,8 +7,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
-const Comment = ({ username, comment, likes, unlikes }) => {
+export default function Comment({ username, comment, likes, unlikes }) {
+    const [like, setLike] = React.useState(false);
+    const [unlike, setUnlike] = React.useState(false);
 
     return (
         <ListItem alignItems="flex-start">
@@ -29,12 +33,22 @@ const Comment = ({ username, comment, likes, unlikes }) => {
                 }
             />
             <div>
-                <ThumbUpAltOutlinedIcon /> {likes}
-                <ThumbDownOutlinedIcon /> {unlikes}
+                <span onClick={() => setLike(!like)}>
+                    {like ? 
+                        <span> <ThumbUpIcon /> {likes+1} </span>
+                    :
+                        <span> <ThumbUpAltOutlinedIcon /> {likes} </span>
+                    }
+                </span>
+                <span onClick={() => setUnlike(!unlike)}>
+                    {unlike ? 
+                        <span> <ThumbDownIcon /> {unlikes+1} </span>
+                    :
+                        <span> <ThumbDownOutlinedIcon /> {unlikes} </span>
+                    }
+                </span>
             </div>
         </ListItem>
     );
 }
-
-export default Comment;
 

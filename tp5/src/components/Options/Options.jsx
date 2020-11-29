@@ -6,15 +6,22 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite'; //corazon con relleno
 
 
+export default function Options() {
+    const [isFavorite, setFavorite] = React.useState(false);
 
-const Options = () => (
-    <div className="options">
-        <div> <AddIcon /></div>
-        <div> <ShareIcon /></div>
-        <div> <FavoriteBorderIcon /></div>
-        <div> <DeleteForeverIcon /></div>
-    </div>
-);
+    return(
+        <div className="options">
+            <div> <AddIcon /></div>
+            <div> <ShareIcon /></div>
+            <div onClick={() => setFavorite(!isFavorite)}>
+                        {isFavorite ? 
+                            <FavoriteIcon />
+                        :
+                            <FavoriteBorderIcon />
+                        }
+                    </div>
+            <div> <DeleteForeverIcon /></div>
+        </div>
+    );
 
-
-export default Options;
+}

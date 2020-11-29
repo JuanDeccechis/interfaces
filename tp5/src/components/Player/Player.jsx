@@ -4,22 +4,32 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import LoopIcon from '@material-ui/icons/Loop';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import PauseIcon from '@material-ui/icons/Pause';
 
-const Player = () => (
-    <div className="player" >
-        <LoopIcon />
-        <div className="player-commands">
-            <SkipPreviousIcon />
-            <PlayArrowIcon />
-            <SkipNextIcon />
+
+export default function Player() {
+    const [isPlay, setPlay] = React.useState(true);
+
+
+    return (
+        <div className="player" >
+            <LoopIcon />
+            <div className="player-commands">
+                <SkipPreviousIcon />
+                <span onClick={() => setPlay(!isPlay)}>
+                    {isPlay ? 
+                        <PauseIcon />
+                    :
+                        <PlayArrowIcon />
+                    }
+                </span>
+                <SkipNextIcon />
+            </div>
+            <div className="show-more">
+                <KeyboardArrowUpIcon className="show-more-icon" />
+                <KeyboardArrowUpIcon className="show-more-icon" />
+                <KeyboardArrowUpIcon className="show-more-icon" />
+            </div>
         </div>
-        <div className="show-more">
-            <KeyboardArrowUpIcon className="show-more-icon" />
-            <KeyboardArrowUpIcon className="show-more-icon" />
-            <KeyboardArrowUpIcon className="show-more-icon" />
-        </div>
-    </div>
-);
-
-
-export default Player;
+    );
+}
