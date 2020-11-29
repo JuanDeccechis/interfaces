@@ -26,9 +26,9 @@ html {
 }
 
 h1{ //titulo de la pantalla
-    font-size: 40;
-    letter-spacing: 7;
-    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: 7px;
+    font-weight: 700px;
     text-align: center;
     margin-bottom: 2rem;
 };
@@ -36,37 +36,36 @@ h2, .popupTitle{ //titulos dentro de la pantalla
     line-height: 35px;
     text-align: "center";
     text-transform: "capitalize";
-    font-size: 20;
-    letter-spacing: 2;
-    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 500px;
 };
 h3{
-    font-size: 18;
-    letter-spacing: .75;
-    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: .75px;
+    font-weight: 400px;
 };
 p, span {
-    font-size: 14;
-    letter-spacing: 2;
+    font-size: 14px;
+    letter-spacing: 2px;
     line-height: 25px;
-    font-weight: 300;
+    font-weight: 300px;
 };
 .littleText {
-    font-size: 8;
-    letter-spacing: .75;
-    font-weight: 300;
+    font-size: 8px;
+    letter-spacing: .75px;
+    font-weight: 300px;
     line-height: 14px;
-    letter-spacing: 2;
 };
 .popupTitle{
-    color: #14142B;
+    color: $popup-title-color;
 }
 .popupText{
-    font-size: 14;
+    font-size: 14px;
     line-height: 25px;
     text-align: center;
-    letter-spacing: 1;
-    color: #4E4B66;
+    letter-spacing: 1px;
+    color: $popup-text-color;
 }
 
 
@@ -233,6 +232,12 @@ h2.section-title {
     }
 }
 
+.endComments{
+    height: 10vh;
+    @media (min-width: 900px) {
+        height: 6vh;
+    }
+}
 
 .popup {
     background-color: $bkg-popup;

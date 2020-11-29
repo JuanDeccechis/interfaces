@@ -36,6 +36,7 @@ const Comments = ({data}) => (
             )}
         </List>
         <ExpandMoreOutlinedIcon />
+        <div className="endComments"></div>
     </>
 );
 export default Comments;
