@@ -2,6 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const primaryColor = '#1D2533;'
 const secondaryColor = '#8DC2DB';
+const titlesColor = '#F2F2F2';
 const white = '#F9F7F7';
   
 
@@ -39,10 +40,13 @@ const theme = createMuiTheme(
             color: secondaryColor
         },
         h2:{
+            lineHeight: 35,
+            textAlign: "center",
+            textTransform: "capitalize",
             fontSize: 20,
             letterSpacing: 2,
             fontWeight: 500,
-            color: secondaryColor
+            color: titlesColor
         },
         h3:{
             fontSize: 18,

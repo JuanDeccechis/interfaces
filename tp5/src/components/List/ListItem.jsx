@@ -30,13 +30,12 @@ export default function ListItem({ data, listType }) {
     }
 
     const handleClick = () => {
-        console.log(effect);
         setEffect(!effect);
 
     }
 
     return (
-        <Accordion className={`list-item ${listType}` }>
+        <Accordion className={`list-item ${listType} margen` }>
             <ListItemMaterial button>
                 <AccordionSummary
                     expandIcon={<MoreHorizIcon />}

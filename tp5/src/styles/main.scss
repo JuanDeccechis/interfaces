@@ -1,16 +1,78 @@
-$bkg-color: #414853;
-$primary-color: #1D2533;
-$secondary-color: #8DC2DB;
-$white: #F9F7F7;
-$gray-200:#C4C4C4;
+$bkg-color: rgba(29, 37, 51, 0.8);
+$bkg-color-containers: rgba(29, 37, 51, 0.5);
+$bkg-color-list-odd:rgba(29, 37, 51, 0.4);
+$bkg-color-sublist-even: rgba(80, 88, 102, 0.6); //opacity: 0.2;
+$bkg-color-sublist-odd: rgba(80, 88, 102, 0.2); //opacity: 0.2;
+$bkg-popup: rgba(255, 255, 255, 1); //border-radius: 24px 24px 0px 0px;
+$bkg-action-success: rgba(0, 186, 136, 1);
+$bkg-action-failure: rgba(237, 46, 126, 1);
+$bkg-color-header-footer: rgba(29, 37, 51, 1);
+$bkg-card-container: rgba(196, 196, 196, 0.1);
+$white-transparent: rgba(249, 247, 247, 0); //revisar si es necesario el transparente
+$popup-title-color: rgba(20, 20, 43, 1);
+$popup-text-color: rgba(78,75,102, 1);
+$placeholder-color:rgba(160,163,189, 1); //#A0A3BD
+
+$secondary-color: rgba(141, 194, 219, 1);
+$white: rgba(249, 247, 247, 1);
+
+*{
+    color: $white;
+    font-family: 'Poppins';
+}
 
 html {
     background-color: $bkg-color;
 }
 
+h1{ //titulo de la pantalla
+    font-size: 40;
+    letter-spacing: 7;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+};
+h2, .popupTitle{ //titulos dentro de la pantalla
+    line-height: 35px;
+    text-align: "center";
+    text-transform: "capitalize";
+    font-size: 20;
+    letter-spacing: 2;
+    font-weight: 500;
+};
+h3{
+    font-size: 18;
+    letter-spacing: .75;
+    font-weight: 400;
+};
+p, span {
+    font-size: 14;
+    letter-spacing: 2;
+    line-height: 25px;
+    font-weight: 300;
+};
+.littleText {
+    font-size: 8;
+    letter-spacing: .75;
+    font-weight: 300;
+    line-height: 14px;
+    letter-spacing: 2;
+};
+.popupTitle{
+    color: #14142B;
+}
+.popupText{
+    font-size: 14;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 1;
+    color: #4E4B66;
+}
+
+
 .toolbar,
 .player {
-    background-color: $primary-color;
+    background-color: $bkg-color-header-footer;
     position: fixed;
     left: 0;
     right: 0;
@@ -27,6 +89,15 @@ html {
     }
 }
 
+.iconsStyle{
+    border: 2px solid $white;
+    background-color: $white-transparent; //revisar si es necesario el transparente
+}
+
+.container{
+    background-color: $bkg-color-containers;
+    padding: 20px;
+}
 
 .toolbar {
     z-index: 3;
@@ -140,7 +211,7 @@ html {
         }
 
         .content {
-            background-color: transparentize($gray-200, .9);
+            background-color: $bkg-card-container;
         }
 
     }
@@ -164,7 +235,7 @@ h2.section-title {
 
 
 .popup {
-    background-color: $white;
+    background-color: $bkg-popup;
     position: fixed;
     top: auto;
     bottom: 50px;
@@ -188,7 +259,11 @@ h2.section-title {
 
 .list {
     svg {
-        fill: $white;
+        fill: $white; //lo mismo que usar la clase .iconsStyle
+    }
+
+    .margen{
+        margin: 0 !important; //quitar
     }
 
     .list-item {
@@ -196,11 +271,11 @@ h2.section-title {
         box-shadow: none;
 
         &:nth-child(odd) {
-            background-color: transparentize($primary-color, .9);
+            background-color: $bkg-color-list-odd;
         }
 
         &:nth-child(even) {
-            background-color: transparentize($bkg-color, .4);
+            background-color: $bkg-color-containers;
         }
 
         .accordion-details {
@@ -215,16 +290,15 @@ h2.section-title {
                 }
 
                 span {
-                    padding: 5px;
+                    padding: 5px 88px; //16+16+56
                 }
 
                 :nth-child(odd) {
-                    background-color: transparentize($gray-200, .7);
-
+                    background-color: $bkg-color-sublist-odd;
                 }
 
                 :nth-child(even) {
-                    background-color: transparentize($gray-200, .4);
+                    background-color: $bkg-color-sublist-even;
                 }
             }
         }
@@ -243,7 +317,7 @@ h2.section-title {
     display: flex;
     justify-content: space-around;
     padding: 20px;
-    background-color: transparentize($primary-color, .4);
+    background-color: $bkg-color-containers;
     .information-title {
         font-weight: bold;
     }
@@ -261,6 +335,10 @@ h2.section-title {
             flex: 0 0 50%;
             margin: auto;
         }
+
+        ul ul {
+            flex: auto;
+        }
     }
 
 }
@@ -273,7 +351,6 @@ h2.section-title {
         justify-content: space-around;
 
         img {
-            //box-shadow: 2px 4px $primary-color;
             &.featured {
                 scale: 150%;
             }
@@ -310,15 +387,6 @@ h2.section-title {
     width: 100%;
 }
 
-.title{
-    font-size: 20px;
-    line-height: 35px;
-    letter-spacing: 2px;
-    width: 100%;
-    text-align: center;
-    text-transform: capitalize;
-}
-
 .dejarComentario{
     display: flex;
     flex-direction: row;
@@ -339,6 +407,8 @@ textarea{
     align-items: center;
     @media (min-width: 900px) {
         flex-direction: row;
+        width: 80%;
+        padding-left: 20%;
     }
 }
 
@@ -349,10 +419,6 @@ textarea{
     justify-content: space-between;
 }
 
-
-*{
-    color: $white;
-}
 
 .songInfo{
     width: 90%;
@@ -366,24 +432,11 @@ textarea{
 
 .songTitle{
     width: 100%;
-    font-size: 20px;
-    line-height: 35px;
-    letter-spacing: 2px;
-    text-align: center;
-    text-transform: capitalize;
 }
 
 .songSubitle{
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 25px;
-
     text-align: center;
-    letter-spacing: 2px;
-
 }
-
 
 .rating{
     margin-top: 100%;
@@ -407,12 +460,4 @@ textarea{
     height: 100px;
 }
 
-h1{
-    text-align: center;
-    margin-bottom: 2rem;
-}
 
-.container{
-    background-color: transparentize($primary-color, .4);
-    padding: 20px;
-}
