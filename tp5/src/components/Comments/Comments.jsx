@@ -17,9 +17,9 @@ const Comments = ({data}) => (
                 <Avatar alt="username" src={`/static/images/avatar/juan.jpg`} />
             </ListItemAvatar>
             <div className="comments">
-                <ListItemText
-                    primary="Deja tu comentario"
-                />
+                <ListItemText>
+                Deja tu comentario
+                </ListItemText>
                 <TextareaAutosize aria-label="minimum height" rowsMin={3} placeholder="Escribe aqui tu comentario" />
             </div>
         </div>

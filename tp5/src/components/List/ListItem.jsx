@@ -46,7 +46,9 @@ export default function ListItem({ data, listType }) {
                     <ListItemIcon>
                         {getFirstIcon()}
                     </ListItemIcon>
-                    <ListItemText primary={data.title} />
+                    <ListItemText>
+                    {data.title}
+                        </ListItemText>
                 </AccordionSummary>
             </ListItemMaterial>
             <AccordionDetails className="accordion-details">

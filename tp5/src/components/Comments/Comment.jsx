@@ -19,19 +19,16 @@ export default function Comment({ username, comment, likes, unlikes }) {
             <ListItemAvatar>
                 <Avatar alt="username" src={`/static/images/avatar/${username}.jpg`} />
             </ListItemAvatar>
-            <ListItemText
-                primary={username}
-                secondary={
-                    <React.Fragment>
-                        <Typography
-                            component="h3"
-                            color="textPrimary"
-                        >
-                        </Typography>
-                        {comment}
+            <ListItemText>
+                {username}
+                <React.Fragment>
+                    <p>
+                    {comment}
+                    </p>
+                        
                     </React.Fragment>
-                }
-            />
+            </ListItemText>
+
             <div>
                 <span onClick={() => setLike(!like)}>
                     {like ? 

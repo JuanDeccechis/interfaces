@@ -9,27 +9,39 @@ import { Divider } from "@material-ui/core";
         return(
             <List className="menu" position="absolute">
                 <ListItem button component="a" href="/interfaces/">
-                    <ListItemText primary="Home" />
+                    <ListItemText>
+                        Home
+                        </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem button component="a" href="/interfaces/song">
-                    <ListItemText primary="Cancion" />
+                    <ListItemText>
+                        Cancion
+                        </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem button component="a" href="/interfaces/playlist">
-                    <ListItemText primary="Playlist" />
+                    <ListItemText>
+                        Playlist
+                        </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem button component="a" href="/interfaces/podcast">
-                    <ListItemText primary="Podcast" />
+                    <ListItemText>
+                        Podcast
+                        </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem button component="a" href="/interfaces/album">
-                    <ListItemText primary="Album" />
+                    <ListItemText>
+                        Album
+                        </ListItemText>
                 </ListItem>
                 <Divider />
                 <ListItem button component="a" href="/interfaces/search">
-                    <ListItemText primary="Busquedas - Calificaciones" />
+                    <ListItemText>
+                        Busquedas
+                        </ListItemText>
                 </ListItem>
                 <Divider />
             </List>

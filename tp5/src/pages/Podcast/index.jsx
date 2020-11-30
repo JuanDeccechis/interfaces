@@ -4,15 +4,17 @@ import { commentsMockup, informationTitlesMockup, informationDataMockup } from "
 
 const Podcast = () => (
     <div className="page">
-        <div className="page-content">
+        
             <Presentation title="La sociedad de Thule" subtitle="Sociedades secretas"/>
+            <div className="separacion"></div>
             <div className="information">
                 <Information titles={informationTitlesMockup} details={informationDataMockup}/>
             </div>
+            <div className="separacion"></div>
             <div className="commentsContainer container">
                 <Comments data={commentsMockup}/>
             </div>
-        </div>
+        
     </div>
 )
 

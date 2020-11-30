@@ -20,7 +20,9 @@ export default function ListItemDetail({ listType }) {
         <List component="ul"  className="list-item-detail">
             { getItemsIcon() && getItemsIcon().map(item =>
                 <ListItem button>
-                    <ListItemText primary={item} />
+                    <ListItemText>
+                        {item}
+                        </ListItemText>
                 </ListItem>
             )}
         </List>
