@@ -14,7 +14,7 @@ const Playlist = () => (
                 classname="playlist-list-home"
             />
             </div>
-            <div className="commentsContainer">
+            <div className="commentsContainer container">
                 <Comments data={commentsMockup}/>
             </div>
         </div>

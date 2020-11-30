@@ -11,7 +11,6 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 const Comments = ({data}) => (
     <>
     <div className="title">
-        Comentarios
         <h2>Comentarios</h2>
         <div className="dejarComentario">
             <ListItemAvatar>

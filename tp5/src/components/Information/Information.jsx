@@ -5,14 +5,14 @@ const Information = ({ titles, details }) => (
     <div className="container-information">
         <div>
             {titles && titles.map(title =>
-                <Typography className="information-title" gutterBottom variant="body1">
+                <Typography className="information-title" gutterBottom>
                     {title}
                 </Typography>
             )}
         </div>
         <div>
             {details && details.map(detail =>
-                <Typography  className="informationText" gutterBottom variant="body1">
+                <Typography  className="informationText" gutterBottom >
                     {detail}
                 </Typography>
             )}

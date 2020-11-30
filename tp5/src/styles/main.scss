@@ -28,22 +28,19 @@ html {
 h1{ //titulo de la pantalla
     font-size: 40px;
     letter-spacing: 7px;
-    font-weight: 700px;
     text-align: center;
     margin-bottom: 2rem;
 };
 h2, .popupTitle{ //titulos dentro de la pantalla
     line-height: 35px;
-    text-align: "center";
-    text-transform: "capitalize";
+    text-align: center;
+    text-transform: capitalize;
     font-size: 20px;
     letter-spacing: 2px;
-    font-weight: 500px;
 };
 h3{
     font-size: 18px;
     letter-spacing: .75px;
-    font-weight: 400px;
 };
 p, span {
     font-size: 14px;
@@ -54,7 +51,6 @@ p, span {
 .littleText {
     font-size: 8px;
     letter-spacing: .75px;
-    font-weight: 300px;
     line-height: 14px;
 };
 .popupTitle{
@@ -149,7 +145,7 @@ p, span {
 .menu, .menuDesplegable {
     position: absolute;
     width: 100vw;
-    background-color: $bkg-color;
+    background-color: $bkg-color-header-footer;
     
     @media (min-width: 900px) {
         height: auto;
@@ -465,4 +461,6 @@ textarea{
     height: 100px;
 }
 
-
+.title{
+    width: 100%;
+}

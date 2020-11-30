@@ -17,7 +17,7 @@ const Presentation = ({title, subtitle}) => (
         <div className="songInfo">
             <div>
                 <h2> {title} </h2>
-                <body1> {subtitle} </body1>
+                <p> {subtitle} </p>
                 <Rating />
             </div>
             <Options />

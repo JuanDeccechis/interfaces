@@ -9,7 +9,7 @@ const Podcast = () => (
             <div className="information">
                 <Information titles={informationTitlesMockup} details={informationDataMockup}/>
             </div>
-            <div className="commentsContainer">
+            <div className="commentsContainer container">
                 <Comments data={commentsMockup}/>
             </div>
         </div>
