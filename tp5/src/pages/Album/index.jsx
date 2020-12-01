@@ -7,7 +7,7 @@ const Album = () => (
 <h1>Album</h1>
             <Presentation title="Niburi" subtitle="Ozuna"/>
             <div className="separacion"></div>
-            <div className="information">
+            <div className="information container">
                 <List
                 data={playlistMock}
                 type="playlist"

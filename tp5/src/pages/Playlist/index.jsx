@@ -7,7 +7,7 @@ const Playlist = () => (
 <h1>Playlist</h1>
             <Presentation title="Safaera" subtitle="Bad Bunny"/>
             <div className="separacion"></div>
-            <div className="information">
+            <div className="information container">
                 <List
                 data={playlistMock}
                 type="playlist"
