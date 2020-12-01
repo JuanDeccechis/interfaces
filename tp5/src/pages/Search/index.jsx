@@ -42,9 +42,7 @@ const Search = () => {
           inputProps={{ 'aria-label': "Buscar" }}
         />
       </Paper>
-      <Button variant="contained" color="primary">
-        Buscar
-        </Button>
+
       <Popup title={"asd"} text={"texto"} textButton={"aceptar"}></Popup>
     </div>
   )

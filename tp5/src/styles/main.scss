@@ -46,7 +46,7 @@ p, span, textarea {
     font-size: 14px;
     letter-spacing: 2px;
     line-height: 25px;
-    font-weight: 300px;
+    font-weight: 300;
 };
 .littleText {
     font-size: 8px;
@@ -164,7 +164,7 @@ p, span, textarea {
 }
 
 .carrousel-simple {
-
+    overflow: hidden;
     >h2 {
        text-align: center;
        margin-bottom: 2rem;
@@ -177,18 +177,22 @@ p, span, textarea {
     }
 
 
-    @media (min-width: 900px) {
-        .actions {
-            display: none;
+    .actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        svg {
+            fill: $white;
         }
     }
 
-    .actions {
-        text-align: end;
-        margin-right: 5rem;
-
-        svg {
-            fill: $white;
+    .actions.true {
+        justify-content: flex-end;
+    }
+    
+    @media (min-width: 900px) {
+        .actions {
+            display: none;
         }
     }
 
@@ -469,7 +473,7 @@ textarea{
     font-size: 14px;
     letter-spacing: 2px;
     line-height: 25px;
-    font-weight: 300px;
+    font-weight: 300;
 }
 
 .commentTitle{
@@ -478,4 +482,18 @@ textarea{
 
 .commentIcon{
     height: 80px;
+}
+
+.cardsAnimable{
+    position: relative;
+}
+
+.animacion1{
+    transform: translate(0, 0);
+    transition: transform 3s;
+}
+
+.animacion2{
+    transform: translate(-500px, 0);
+    transition: transform 3s;
 }

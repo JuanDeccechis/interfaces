@@ -18,11 +18,13 @@ const Page = () => (
         <div className="separacion"></div>
         <Simple
             title="Elegidos para ti"
+            id={1}
             cards={songMockup}
         />
         <div className="separacion"></div>
         <Simple
             title="Los últimos podcast"
+            id={2}
             cards={podcastMockup}
         />
     </div>
