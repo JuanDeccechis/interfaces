@@ -4,13 +4,14 @@ import { commentsMockup, playlistMock} from "./mocks"
 
 const Album = () => (
 <div className="page">
+<h1>Album</h1>
             <Presentation title="Niburi" subtitle="Ozuna"/>
             <div className="separacion"></div>
             <div className="information">
                 <List
                 data={playlistMock}
                 type="playlist"
-                classname="playlist-list-home"
+                classname="playlist-list-album"
             />
             </div>
             <div className="separacion"></div>

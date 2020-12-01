@@ -20,7 +20,7 @@ const Comments = ({data}) => (
                 <ListItemText>
                 Deja tu comentario
                 </ListItemText>
-                <TextareaAutosize aria-label="minimum height" rowsMin={3} placeholder="Escribe aqui tu comentario" />
+                <TextareaAutosize className="placeholder" aria-label="minimum height" rowsMin={3} placeholder="Escribe aqui tu comentario" />
             </div>
         </div>
     </div>

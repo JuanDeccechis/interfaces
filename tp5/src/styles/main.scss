@@ -42,7 +42,7 @@ h3{
     font-size: 18px;
     letter-spacing: .75px;
 };
-p, span {
+p, span, textarea {
     font-size: 14px;
     letter-spacing: 2px;
     line-height: 25px;
@@ -328,7 +328,6 @@ h2.section-title {
 
     @media (min-width: 900px) {
         display: flex;
-        margin: 0 11rem;
 
         >h2,
         ul {
@@ -463,4 +462,20 @@ textarea{
 
 .title{
     width: 100%;
+}
+
+.placeholder{
+    color: $placeholder-color;
+    font-size: 14px;
+    letter-spacing: 2px;
+    line-height: 25px;
+    font-weight: 300px;
+}
+
+.commentTitle{
+    font-weight: 600;
+}
+
+.commentIcon{
+    height: 80px;
 }

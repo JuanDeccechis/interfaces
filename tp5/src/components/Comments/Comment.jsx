@@ -15,12 +15,16 @@ export default function Comment({ username, comment, likes, unlikes }) {
     const [unlike, setUnlike] = React.useState(false);
 
     return (
-        <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-                <Avatar alt="username" src={`/static/images/avatar/${username}.jpg`} />
-            </ListItemAvatar>
+        <ListItem>
+            <div className="commentIcon">
+                <ListItemAvatar>
+                    <Avatar alt="username" src={`/static/images/avatar/${username}.jpg`} />
+                </ListItemAvatar>
+            </div>
             <ListItemText>
-                {username}
+                <span className="commentTitle">
+                    {username}
+                </span>
                 <React.Fragment>
                     <p>
                     {comment}

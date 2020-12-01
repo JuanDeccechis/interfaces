@@ -4,7 +4,7 @@ import { commentsMockup, informationTitlesMockup, informationDataMockup } from "
 
 const Song = () => (
     <div className="page">
-        
+        <h1>Cancion</h1>
             <Presentation title="Safaera" subtitle="Bad Bunny"/>
             <div className="separacion"></div>
             <div className="information">
