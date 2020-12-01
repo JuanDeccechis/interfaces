@@ -15,15 +15,15 @@ export default function Player() {
         <div className="player" >
             <LoopIcon />
             <div className="player-commands">
-                <SkipPreviousIcon />
+                <SkipPreviousIcon className="player-commands-icons"/>
                 <span onClick={() => setPlay(!isPlay)}>
                     {isPlay ? 
-                        <PauseIcon />
+                        <PauseIcon className="player-commands-icons"/>
                     :
-                        <PlayArrowIcon />
+                        <PlayArrowIcon className="player-commands-icons"/>
                     }
                 </span>
-                <SkipNextIcon />
+                <SkipNextIcon className="player-commands-icons"/>
             </div>
             <div className="show-more">
                 <KeyboardArrowUpIcon className="show-more-icon" />

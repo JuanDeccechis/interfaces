@@ -11,6 +11,8 @@ export default function ListItemDetail({ listType }) {
                 return ["Ver playlist", "Modificar", "Compartir", "Eliminar"]
             case "cancion":
                 return ["Ver canción", "Modificar", "Compartir", "Eliminar"]
+            case "search":
+                return ["Canción", "Album", "Playlist", "Podcast"]
             default:
                 break;
         }

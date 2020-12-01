@@ -1,12 +1,11 @@
 import React from "react";
-import { Popup, ListApp } from "../../components";
-import { listMockup } from "./mocks"
+import { List } from "../../components";
+import { searchMockup } from "./mocks"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,8 +31,9 @@ const Search = () => {
   const classes = useStyles();
   return (
     <div className="page">
+      <h1>Busquedas</h1>
       <Paper component="form" className={classes.root}>
-        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+        <IconButton type="submit" className="black" aria-label="search">
           <SearchIcon />
         </IconButton>
         <InputBase
@@ -42,8 +42,17 @@ const Search = () => {
           inputProps={{ 'aria-label': "Buscar" }}
         />
       </Paper>
+      <div className="separacion"></div>
+      <div className="information container">
+        <h2>Filtros</h2>
+                <List
+                data={searchMockup}
+                type="playlist"
+                classname="playlist-list-album"
+                type="search"
+            />
+        </div>
 
-      <Popup title={"asd"} text={"texto"} textButton={"aceptar"}></Popup>
     </div>
   )
 };

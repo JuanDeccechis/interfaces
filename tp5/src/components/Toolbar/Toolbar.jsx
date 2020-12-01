@@ -17,7 +17,9 @@ const Toolbar = () => {
                 </div>
             }
             <div className="right">
-                <SearchIcon />
+                <a href="/interfaces/search">
+                    <SearchIcon />
+                </a>
                 <NotificationsNoneIcon />
                 <Avatar />
             </div>

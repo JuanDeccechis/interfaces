@@ -8,7 +8,7 @@ export default function Simple({ title, id, cards }) {
     const [showBack, setShowBack] = React.useState(false);
     const [showForward, setShowForward] = React.useState(true);
 
-    const saludar = (nombre) => {
+    const verCards = (nombre) => {
         switch (nombre) {
             case "atras":
                     document.querySelector(`.cardsAnimable${id}`).classList.add("animacion1");
@@ -43,10 +43,10 @@ export default function Simple({ title, id, cards }) {
         </div>
         <div className={`actions ${showForward}`} >
             {showBack && 
-                <ArrowBackIcon onClick={() => saludar("atras")}/>
+                <ArrowBackIcon onClick={() => verCards("atras")}/>
             }
             {showForward &&
-                <ArrowForwardIcon onClick={() => saludar("siguiente")}/>
+                <ArrowForwardIcon onClick={() => verCards("siguiente")}/>
             }
         </div>
     </div>

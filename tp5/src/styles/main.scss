@@ -497,3 +497,16 @@ textarea{
     transform: translate(-500px, 0);
     transition: transform 3s;
 }
+
+.black{
+    .MuiSvgIcon-root{
+        fill: $popup-title-color;
+    }
+}
+
+.player-commands {
+    .player-commands-icons{
+        padding-right: 30px;
+        font-size: 30px;
+    }
+}
