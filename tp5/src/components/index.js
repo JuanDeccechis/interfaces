@@ -1,5 +1,6 @@
 export { default as Card } from "./Card/Card";
 export * from "./Carrousels";
+export { default as Checkbox } from "./Checkbox/Checkbox";
 export { default as Comments } from "./Comments/Comments";
 export { default as List } from "./List/List";
 export { default as Player } from "./Player/Player";

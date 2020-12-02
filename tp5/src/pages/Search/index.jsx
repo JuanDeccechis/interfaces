@@ -1,6 +1,6 @@
 import React from "react";
-import { List } from "../../components";
-import { searchMockup } from "./mocks"
+import { Simple, List, Checkbox } from "../../components";
+import { searchTypeMockup, searchGenreMockup, songMockup, podcastMockup, playlistMockup } from "./mocks"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -46,12 +46,36 @@ const Search = () => {
       <div className="information container">
         <h2>Filtros</h2>
                 <List
-                data={searchMockup}
-                type="playlist"
+                data={searchTypeMockup}
                 classname="playlist-list-album"
                 type="search"
             />
-        </div>
+            <Checkbox />
+      </div>
+      <div className="separacion"></div>
+        <Simple
+            title="Canciones"
+            id={1}
+            cards={songMockup}
+        />
+        <div className="separacion"></div>
+        <Simple
+            title="Podcast"
+            id={2}
+            cards={podcastMockup}
+        />
+        <div className="separacion"></div>
+        <Simple
+            title="Playlist"
+            id={3}
+            cards={playlistMockup}
+        />
+        <div className="separacion"></div>
+        <Simple
+            title="Album"
+            id={4}
+            cards={podcastMockup}
+        />
 
     </div>
   )

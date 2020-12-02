@@ -42,7 +42,7 @@ h3{
     font-size: 18px;
     letter-spacing: .75px;
 };
-p, span, textarea {
+p, span, textarea, .misOptions {
     font-size: 14px;
     letter-spacing: 2px;
     line-height: 25px;
@@ -509,4 +509,12 @@ textarea{
         padding-right: 30px;
         font-size: 30px;
     }
+}
+
+.MuiInputBase-input.MuiOutlinedInput-input.MuiAutocomplete-input.MuiAutocomplete-inputFocused.MuiInputBase-inputAdornedEnd.MuiOutlinedInput-inputAdornedEnd{
+    color: $white;
+}
+
+.misOptions{
+    color: $popup-title-color;
 }
