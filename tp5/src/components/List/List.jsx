@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 import Typography from '@material-ui/core/Typography';
 
 
-export default function List({ data, title, type, classname }) {
+export default function List({ data, title, type, classname, setSearchResults }) {
   return (
     <div className={classname}>
       {title && 
@@ -20,6 +20,7 @@ export default function List({ data, title, type, classname }) {
           <ListItem
             data={listCompleteItem}
             listType={type}
+            setSearchResults={setSearchResults}
           />
         )}
       </ListMaterial>

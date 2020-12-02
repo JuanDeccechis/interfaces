@@ -27,8 +27,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Search = () => {
+export default function Search({  }) {
+  const [searchInSongs, setSearchInSongs] = React.useState(true);
+  const [searchInPodcast, setSearchInPodcast] = React.useState(true);
+  const [searchInPlaylist, setSearchInPlaylist] = React.useState(true);
+  const [searchInAlbum, setSearchInAlbum] = React.useState(true);
   const classes = useStyles();
+
+  const setSearchResults = (resultType) => {
+    switch (resultType) {
+        case "Cancion":
+          return setSearchInSongs(!searchInSongs);
+        case "Podcast":
+          return setSearchInPodcast(!searchInPodcast);
+        case "Playlist":
+          return setSearchInPlaylist(!searchInPlaylist);
+        case "Album": 
+          return setSearchInAlbum(!searchInAlbum);
+        default:
+            break;
+    }
+}
   return (
     <div className="page">
       <h1>Busquedas</h1>
@@ -49,36 +68,52 @@ const Search = () => {
                 data={searchTypeMockup}
                 classname="playlist-list-album"
                 type="search"
+                setSearchResults={setSearchResults}
             />
             <Checkbox />
       </div>
-      <div className="separacion"></div>
-        <Simple
-            title="Canciones"
-            id={1}
-            cards={songMockup}
-        />
+
+      {searchInSongs &&
+      <div>
         <div className="separacion"></div>
-        <Simple
-            title="Podcast"
-            id={2}
-            cards={podcastMockup}
-        />
-        <div className="separacion"></div>
-        <Simple
-            title="Playlist"
-            id={3}
-            cards={playlistMockup}
-        />
-        <div className="separacion"></div>
-        <Simple
-            title="Album"
-            id={4}
-            cards={podcastMockup}
-        />
+          <Simple
+              title="Canciones"
+              id={1}
+              cards={songMockup}
+          />
+      </div>
+      }
+      {searchInPodcast &&
+        <div>
+          <div className="separacion"></div>
+          <Simple
+              title="Podcast"
+              id={2}
+              cards={podcastMockup}
+          />
+        </div>
+      }
+      {searchInPlaylist &&
+        <div>
+          <div className="separacion"></div>
+          <Simple
+              title="Playlist"
+              id={3}
+              cards={playlistMockup}
+          />
+        </div>
+      }
+      {searchInAlbum &&
+        <div>
+          <div className="separacion"></div>
+          <Simple
+              title="Album"
+              id={4}
+              cards={podcastMockup}
+          />
+        </div>
+      }
 
     </div>
   )
 };
-
-export default Search;

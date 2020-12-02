@@ -8,7 +8,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Accordion from '@material-ui/core/Accordion';
 import ListItemDetail from "./ListItemDetail";
 
-export default function ListItem({ data, listType }) {
+export default function ListItem({ data, listType, setSearchResults }) {
     const [effect, setEffect] = React.useState(false);
         
 
@@ -52,7 +52,7 @@ export default function ListItem({ data, listType }) {
                 </AccordionSummary>
             </ListItemMaterial>
             <AccordionDetails className="accordion-details">
-                <ListItemDetail listType={listType} />
+                <ListItemDetail listType={listType} setSearchResults={setSearchResults} />
             </AccordionDetails>
         </Accordion>
     );

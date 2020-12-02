@@ -41,7 +41,7 @@ export default function Rating({commentRating}) {
             }
         </div>
         :
-        <div>
+        <div className="onlyWeb">
             <div className="show-more">
                         <StarBorderIcon/>
                     <span>
