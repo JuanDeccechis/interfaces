@@ -2,7 +2,7 @@ import React from "react";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import GradeIcon from '@material-ui/icons/Grade'; //estrellas con relleno
 
-export default function Rating() {
+export default function Rating({commentRating}) {
     const [show, setOpen] = React.useState(false);
     const [rating, setRating] = React.useState(3);
   
@@ -20,6 +20,8 @@ export default function Rating() {
     };
 
     return (
+        <div>
+        {!commentRating ?
         <div className="rating">
             {!show ?
                 <div className="show-more">
@@ -37,5 +39,16 @@ export default function Rating() {
                     <StarBorderIcon onClick={() => showDetails(5)} />
                 </div>
             }
+        </div>
+        :
+        <div>
+            <div className="show-more">
+                        <StarBorderIcon/>
+                    <span>
+                        {rating} / 5
+                    </span>
+                </div>
+        </div>
+        }
         </div>
 )}

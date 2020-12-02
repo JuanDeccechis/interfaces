@@ -9,6 +9,7 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import Rating from "../Rating/Rating";
 
 export default function Comment({ username, comment, likes, unlikes }) {
     const [like, setLike] = React.useState(false);
@@ -48,6 +49,7 @@ export default function Comment({ username, comment, likes, unlikes }) {
                         <span> <ThumbDownOutlinedIcon /> {unlikes} </span>
                     }
                 </span>
+                <Rating commentRating={true}/>
             </div>
         </ListItem>
     );
