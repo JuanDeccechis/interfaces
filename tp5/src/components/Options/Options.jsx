@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite'; //corazon con relleno
 
 
-export default function Options() {
+export default function Options({isDeletable}) {
     const [isFavorite, setFavorite] = React.useState(false);
 
     return(
@@ -20,7 +20,9 @@ export default function Options() {
                             <FavoriteBorderIcon />
                         }
                     </div>
-            <div> <DeleteForeverIcon /></div>
+            {isDeletable && 
+                <div> <DeleteForeverIcon /></div>
+            }
         </div>
     );
 

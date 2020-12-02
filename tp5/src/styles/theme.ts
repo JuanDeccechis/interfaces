@@ -21,7 +21,7 @@ const theme = createMuiTheme(
         },
     },
     typography: {
-        fontFamily: 'Poppins, Arial',
+        fontFamily: 'Poppins',
         h1:{
             fontSize: 40,
             letterSpacing: 7,

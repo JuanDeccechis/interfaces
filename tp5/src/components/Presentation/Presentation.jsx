@@ -4,7 +4,7 @@ import { songMockup} from "./mocks"
 import Options from "../Options/Options";
 import Rating from "../Rating/Rating";
 
-const Presentation = ({title, subtitle}) => (
+const Presentation = ({title, subtitle, isDeletable}) => (
     <div className="presentation">
         <div className="image"> 
             <CardMedia
@@ -20,7 +20,7 @@ const Presentation = ({title, subtitle}) => (
                 <p> {subtitle} </p>
                 <Rating />
             </div>
-            <Options />
+            <Options isDeletable={isDeletable}/>
         </div>
     </div>
 )

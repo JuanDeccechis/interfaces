@@ -5,7 +5,7 @@ import { commentsMockup, playlistMock} from "./mocks"
 const Playlist = () => (
 <div className="page">
 <h1>Playlist</h1>
-            <Presentation title="Safaera" subtitle="Bad Bunny"/>
+            <Presentation title="Safaera" subtitle="Bad Bunny" isDeletable={true}/>
             <div className="separacion"></div>
             <div className="information container">
                 <List

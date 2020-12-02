@@ -5,7 +5,7 @@ import { commentsMockup, informationTitlesMockup, informationDataMockup } from "
 const Podcast = () => (
     <div className="page">
         <h1>Podcast</h1>
-            <Presentation title="La sociedad de Thule" subtitle="Sociedades secretas"/>
+            <Presentation title="La sociedad de Thule" subtitle="Sociedades secretas" isDeletable={true}/>
             <div className="separacion"></div>
             <div className="information">
                 <Information titles={informationTitlesMockup} details={informationDataMockup}/>
