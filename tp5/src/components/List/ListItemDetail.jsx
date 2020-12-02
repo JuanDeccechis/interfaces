@@ -42,7 +42,7 @@ export default function ListItemDetail({ listType, setSearchResults }) {
 
     return (
         <List component="ul"  className="list-item-detail">
-            { getItemsIcon() && getItemsIcon().map(item =>
+            { listType==="search" && getItemsIcon() && getItemsIcon().map(item =>
                 <ListItem button  onClick={()=> asd(item)}>
                     <ListItemText>
                         {listType === "search" && item.checked &&
@@ -52,6 +52,13 @@ export default function ListItemDetail({ listType, setSearchResults }) {
                             <CheckBoxOutlineBlankIcon className={"checkBoxIconsPosition"} />
                         }
                         {item.title}
+                        </ListItemText>
+                </ListItem>
+            )}
+            { listType!=="search" && getItemsIcon() && getItemsIcon().map(item =>
+                <ListItem button>
+                    <ListItemText>
+                        {item}
                         </ListItemText>
                 </ListItem>
             )}
